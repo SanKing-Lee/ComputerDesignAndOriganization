@@ -81,7 +81,7 @@ module regfile(
 		else if(raddr2 == `RegNumLog2'h0) begin
 			rdata2 <= `ZeroWord;
 		end
-		else if((raddr2 == waddr) && (we = `WriteEnable) && (re2 == `ReadEnable)) begin
+		else if((raddr2 == waddr) && (we == `WriteEnable) && (re2 == `ReadEnable)) begin
 			rdata2 <= wdata;
 		end
 		else if(re2 == `ReadEnable) begin

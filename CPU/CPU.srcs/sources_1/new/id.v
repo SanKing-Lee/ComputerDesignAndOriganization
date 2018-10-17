@@ -61,7 +61,7 @@ module id(
 			reg2_read_o <= `ReadDisable;
 			reg1_addr_o <= `NOPRegAddr;
 			reg2_addr_o <= `NOPRegAddr;
-			wd_0 <= `NOPRegAddr;
+			wd_o <= `NOPRegAddr;
 			wreg_o <= `WriteDisable;
 			imm <= `ZeroWord; 
 		end
@@ -87,7 +87,7 @@ module id(
 					reg1_read_o <= `ReadEnable;
 					reg2_read_o <= `ReadDisable;
 					wd_o <= inst_i[20:16];
-					wrge_o <= `WriteEnable;
+					wreg_o <= `WriteEnable;
 					imm <= {16'h0, inst_i[15:0]};
 				end
 				default:begin
