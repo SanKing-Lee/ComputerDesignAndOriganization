@@ -36,7 +36,7 @@ module pc_reg(
 			ce <= `ChipDisable;
 		end
 		else begin
-			ce <= `ChipDisable;
+			ce <= `ChipEnable;
 		end
 	end
 

@@ -63,7 +63,7 @@ module openmips(
 	wire[`RegAddrBus] mem_wd_o;
 	wire[`RegBus] mem_wdata_o;
 
-	//meme_wb and wb
+	//wb and regfile
 	wire wb_wreg_i;
 	wire[`RegAddrBus] wb_wd_i;
 	wire[`RegBus] wb_wdata_i;
@@ -130,7 +130,7 @@ module openmips(
 		,.wd_i    (ex_wd_i)		,.wreg_i  (ex_wreg_i)
 		//to ex_mem
 		,.wreg_o  (ex_wreg_o)	,.wd_o    (ex_wd_o)
-		,.wdata_o (ex_wd_o)
+		,.wdata_o (ex_wdata_o)
 		);
 	//ex_mem
 	ex_mem ex_mem0(
