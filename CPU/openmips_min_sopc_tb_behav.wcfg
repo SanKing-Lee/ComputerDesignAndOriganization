@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="openmips_min_sopc_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="openmips_min_sopc_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="13509750fs"></ZoomEndTime>
+      <Cursor1Time time="59053000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="175"></NameColumnWidth>
+      <ValueColumnWidth column_width="138"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject type="logic" fp_name="/openmips_min_sopc_tb/CLOCK_50">
+      <obj_property name="ElementShortName">CLOCK_50</obj_property>
+      <obj_property name="ObjectShortName">CLOCK_50</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/openmips_min_sopc_tb/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/pc_reg0/pc">
+      <obj_property name="ElementShortName">pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/pc_reg0/ce">
+      <obj_property name="ElementShortName">ce</obj_property>
+      <obj_property name="ObjectShortName">ce</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/if_id0/id_pc">
+      <obj_property name="ElementShortName">id_pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_pc[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/if_id0/id_inst">
+      <obj_property name="ElementShortName">id_inst[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_inst[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/id0/pc_i">
+      <obj_property name="ElementShortName">pc_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/id0/inst_i">
+      <obj_property name="ElementShortName">inst_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">inst_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/inst_rom0/addra">
+      <obj_property name="ElementShortName">addra[31:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/inst_rom0/douta">
+      <obj_property name="ElementShortName">douta[31:0]</obj_property>
+      <obj_property name="ObjectShortName">douta[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/regfile0/regs[1]">
+      <obj_property name="ElementShortName">[1][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[1][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/regfile0/regs[2]">
+      <obj_property name="ElementShortName">[2][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[2][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/regfile0/regs[3]">
+      <obj_property name="ElementShortName">[3][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[3][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/openmips_min_sopc_tb/openmps_min_sopc0/openmips0/regfile0/regs[4]">
+      <obj_property name="ElementShortName">[4][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[4][31:0]</obj_property>
+   </wvobject>
+</wave_config>

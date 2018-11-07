@@ -2,5 +2,4 @@ Vivado Simulator 2018.1
 Time resolution is 1 ps
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module inst_rom_tb.inst_rom2.inst.native_mem_mapped_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
-emory collision behavior.
+Block Memory Generator module openmips_min_sopc_tb.openmps_min_sopc0.inst_rom0.inst.native_mem_mapped_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.

@@ -29,6 +29,16 @@ module id(
 	input wire[`InstBus] inst_i,
 	//read registers 
 	input wire[`RegBus] reg1_data_i, reg2_data_i,
+
+	//data forwarding for stage ex
+	input wire ex_wreg_i,
+	input wire[`RegAddrBus] ex_wd_i,
+	input wire[`RegBus] ex_wdata_i,
+	//data forwarding for stage mem
+	input wire mem_wreg_i,
+	input wire[`RegAddrBus] mem_wd_i,
+	input wire[`RegBus] mem_wdata_i,
+
 	output reg reg1_read_o, reg2_read_o,
 	output reg[`RegAddrBus] reg1_addr_o, reg2_addr_o,
 	//parts of instruction
@@ -104,9 +114,17 @@ module id(
 		else if(reg1_read_o == `ReadEnable) begin
 			reg1_o <= reg1_data_i;
 		end
-		else if(reg1_read_o <= `ReadDisable) begin
+		else if(reg1_read_o == `ReadDisable) begin
 			reg1_o <= imm;
 		end
+		//new condition: data from exe
+		else if(reg1_read_o == `ReadEnable && ex_wreg_i == `WriteEnable && reg1_addr_o == ex_wd_i) begin
+			reg1_o <= ex_wdata_i;
+		end // else if(ex_wreg_i == `ReadEnable)
+		//new condition: data from mem
+		else if(reg1_read_o == `ReadEnable && mem_wreg_i == `WriteEnable && reg1_addr_o == mem_wd_i) begin
+			reg1_o <= mem_wdata_i;
+		end // else if(reg1_read_o == `ReadEnable && mem_wreg_i == `WriteEnable && reg1_addr_o == mem_wd_i)
 		else begin 
 			reg1_o <= `ZeroWord;
 		end
@@ -123,6 +141,13 @@ module id(
 		else if(reg2_read_o == `ReadDisable) begin
 			reg2_o <= imm;
 		end
+		//new condition: data from exe
+		else if(reg2_read_o == `ReadEnable && ex_wreg_i == `WriteEnable && reg2_addr_o == ex_wd_i) begin
+			reg2_o <= ex_wdata_i;
+		end // else if(reg2_read_o == `ReadEnable && ex_wreg_i == `WriteEnable && reg2_addr_o == ex_wd_i)
+		else if(reg2_read_o == `ReadEnable && mem_wreg_i == `WriteEnable && reg2_addr_o == mem_wd_i) begin
+			reg2_o <= mem_wdata_i;
+		end // else if(reg2_read_o == `ReadEnable && mem_wreg_i == `WriteEnable && reg2_addr_o == mem_wd_i)
 		else begin
 			reg2_o <= `ZeroWord;
 		end

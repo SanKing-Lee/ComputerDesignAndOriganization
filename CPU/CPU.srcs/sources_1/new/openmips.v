@@ -97,6 +97,12 @@ module openmips(
 		,.aluop_o(id_aluop_o),.alusel_o(id_alusel_o)
 		,.reg1_o(id_reg1_o),.reg2_o(id_reg2_o)
 		,.wd_o(id_wd_o),.wreg_o(id_wreg_o)
+		//data forwarding from ex
+		,.ex_wreg_i  (ex_wreg_o)	,.ex_wd_i    (ex_wd_o)
+		,.ex_wdata_i (ex_wdata_o)
+		//data forwarding from mem
+		,.mem_wreg_i (mem_wreg_o)	,.mem_wd_i   (mem_wd_o)
+		,.mem_wdata_i(mem_wdata_o)
 		);
 	//regfile
 	regfile regfile0(
