@@ -90,16 +90,94 @@ module id(
 
 			//assign the output according to the instruction
 			case(op)
-				`EXE_ORI: begin
-					instvalid <= `InstValid;
-					aluop_o <= `EXE_OR_OP;
-					alusel_o <= `EXE_RES_LOGIC;
-					reg1_read_o <= `ReadEnable;
-					reg2_read_o <= `ReadDisable;
-					wd_o <= inst_i[20:16];
-					wreg_o <= `WriteEnable;
-					imm <= {16'h0, inst_i[15:0]};
+				//special instructions
+				`EXE_SPECIAL_INST: begin 	
+					case(op2) begin
+						5'b00000: begin
+							case(op3) begin
+								//and
+								`EXE_AND: begin
+									instvalid <= `InstValid;
+									aloup_o <= `EXE_AND_OP;
+									alusel_o <= `EXE_RES_LOGIC;
+									reg1_read_o <= `ReadEnable;
+									reg2_read_o <= `ReadEnable;
+									wreg_o <= `WriteEnable;
+								end 
+								`EXE_OR: begin
+									instvalid <= `InstValid;
+									aluop_o <= `EXE_OR_OP;
+									alusel_o <= `EXE_RES_LOGIC;
+									reg1_read_o <= `ReadEnable;
+									reg2_read_o <= `ReadEnable;
+									wreg_o <= `WriteEnable;
+								end
+								`EXE_XOR: begin
+									instvalid <= `InstValid;
+									aluop_o <= `EXE_XOR_OP;
+									alusel_o <= `EXE_RES_LOGIC;
+									reg1_read_o <= `ReadEnable;
+									reg2_read_o <= `ReadEnable`;
+									wreg_o <= `WriteEnable;
+								end
+								`EXE_NOR: begin
+									instvalid <= `InstValid;
+									aluop_o <= `EXE_NOR_OP;
+									alusel_o <= `EXE_RES_LOGIC;
+									reg1_read_o <= `ReadEnable;
+									reg2_read_o <= `ReadEnable`;
+									wreg_o <= `WriteEnable;						
+								end
+								`EXE_SLLV: begin
+									instvalid <= `InstValid;
+									aluop_o <= `EXE_SLL_OP;
+									alusel_o <= `EXE_RES_SHIFT;
+									reg1_read_o <= `ReadEnable;
+									reg2_read_o <= `ReadEnable`;
+									wreg_o <= `WriteEnable;						
+								end	
+								`EXE_SRLV: begin
+									instvalid <= `InstValid;
+									aluop_o <= `EXE_SRL_OP;
+									alusel_o <= `EXE_RES_SHIFT;
+									reg1_read_o <= `ReadEnable;
+									reg2_read_o <= `ReadEnable`;
+									wreg_o <= `WriteEnable;						
+								end	
+								`EXE_SRAV: begin
+									instvalid <= `InstValid;
+									aluop_o <= `EXE_SRA_OP;
+									alusel_o <= `EXE_RES_SHIFT;
+									reg1_read_o <= `ReadEnable;
+									reg2_read_o <= `ReadEnable`;
+									wreg_o <= `WriteEnable;						
+								end	
+								`EXE_SYNC: begin
+									instvalid <= `InstValid;
+									aluop_o <= `EXE_NOP_OP;
+									alusel_o <= `EXE_RES_NOP;
+									reg1_read_o <= `ReadDisable;
+									reg2_read_o <= `ReadEnable`;
+									wreg_o <= `WriteEnable;						
+								end	
+								default: begin
+								end // default:
+							endcase // op3
+						end
+						default: begin
+						end // default:
+					endcase
 				end
+				`EXE_ORI: begin
+						instvalid <= `InstValid;
+						aluop_o <= `EXE_OR_OP;
+						alusel_o <= `EXE_RES_LOGIC;
+						reg1_read_o <= `ReadEnable;
+						reg2_read_o <= `ReadDisable;
+						wd_o <= inst_i[20:16];
+						wreg_o <= `WriteEnable;
+						imm <= {16'h0, inst_i[15:0]};
+					end
 				default:begin
 				end
 			endcase
