@@ -111,12 +111,7 @@ module id(
 		if(rst == `RstEnable) begin
 			reg1_o <= `ZeroWord;
 		end
-		else if(reg1_read_o == `ReadEnable) begin
-			reg1_o <= reg1_data_i;
-		end
-		else if(reg1_read_o == `ReadDisable) begin
-			reg1_o <= imm;
-		end
+		//the data forwarding need to be frotier than the normal data pass
 		//new condition: data from exe
 		else if(reg1_read_o == `ReadEnable && ex_wreg_i == `WriteEnable && reg1_addr_o == ex_wd_i) begin
 			reg1_o <= ex_wdata_i;
@@ -125,6 +120,12 @@ module id(
 		else if(reg1_read_o == `ReadEnable && mem_wreg_i == `WriteEnable && reg1_addr_o == mem_wd_i) begin
 			reg1_o <= mem_wdata_i;
 		end // else if(reg1_read_o == `ReadEnable && mem_wreg_i == `WriteEnable && reg1_addr_o == mem_wd_i)
+		else if(reg1_read_o == `ReadEnable) begin
+			reg1_o <= reg1_data_i;
+		end
+		else if(reg1_read_o == `ReadDisable) begin
+			reg1_o <= imm;
+		end
 		else begin 
 			reg1_o <= `ZeroWord;
 		end
@@ -135,12 +136,6 @@ module id(
 		if(rst == `RstEnable) begin
 			reg2_o <= `ZeroWord;
 		end
-		else if(reg2_read_o == `ReadEnable) begin
-			reg2_o <= reg2_data_i;
-		end // else if(reg2_read_o == `ReadEnable)
-		else if(reg2_read_o == `ReadDisable) begin
-			reg2_o <= imm;
-		end
 		//new condition: data from exe
 		else if(reg2_read_o == `ReadEnable && ex_wreg_i == `WriteEnable && reg2_addr_o == ex_wd_i) begin
 			reg2_o <= ex_wdata_i;
@@ -148,6 +143,12 @@ module id(
 		else if(reg2_read_o == `ReadEnable && mem_wreg_i == `WriteEnable && reg2_addr_o == mem_wd_i) begin
 			reg2_o <= mem_wdata_i;
 		end // else if(reg2_read_o == `ReadEnable && mem_wreg_i == `WriteEnable && reg2_addr_o == mem_wd_i)
+		else if(reg2_read_o == `ReadEnable) begin
+			reg2_o <= reg2_data_i;
+		end // else if(reg2_read_o == `ReadEnable)
+		else if(reg2_read_o == `ReadDisable) begin
+			reg2_o <= imm;
+		end
 		else begin
 			reg2_o <= `ZeroWord;
 		end
