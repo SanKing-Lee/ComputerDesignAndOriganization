@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1539760713">
-  <File Type="RDS-DCP" Name="openmips.dcp"/>
   <File Type="PA-TCL" Name="openmips.tcl"/>
+  <File Type="RDS-DCP" Name="openmips.dcp"/>
   <File Type="REPORTS-TCL" Name="openmips_reports.tcl"/>
   <File Type="RDS-RDS" Name="openmips.vds"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">

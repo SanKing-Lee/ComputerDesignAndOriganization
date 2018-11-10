@@ -1,12 +1,19 @@
 # ComputerDesignAndOriganization
 design a cpu with verilog according to the book
+
 vivado version: 2018.1
+
 text editor: sumblime-text 3
-operation system: linux 18.01
+
+operating system: linux 18.01
+
+**2018.11.10**
+1. finished the decode stage of added instructions
+	- modified the id.v 
 
 **2018.11.08**
 1. finished the simulation of data forwarding
-	- modified the id to add data forwarding 
+	- modified the id.v to add data forwarding 
 		- added the input from stage ex and mem
 		- added the code of data forwarding in the registers assignment
 			- added in the front of the normal data passing 
