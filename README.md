@@ -1,5 +1,5 @@
 # ComputerDesignAndOriganization
-design a cpu with verilog according to the book
+design a cpu with verilog according to the book《自己动手写CPU》
 
 vivado version: 2018.1
 
