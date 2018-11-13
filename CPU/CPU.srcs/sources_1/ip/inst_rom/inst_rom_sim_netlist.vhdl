@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
--- Date        : Wed Nov  7 20:42:26 2018
+-- Date        : Tue Nov 13 20:48:28 2018
 -- Host        : shawn-All-Series running 64-bit Ubuntu 18.04.1 LTS
--- Command     : write_vhdl -force -mode funcsim -rename_top inst_rom -prefix
---               inst_rom_ inst_rom_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim
+--               /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/ip/inst_rom/inst_rom_sim_netlist.vhdl
 -- Design      : inst_rom
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -21,6 +21,8 @@ entity inst_rom_blk_mem_gen_prim_wrapper_init is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_prim_wrapper_init : entity is "blk_mem_gen_prim_wrapper_init";
 end inst_rom_blk_mem_gen_prim_wrapper_init;
 
 architecture STRUCTURE of inst_rom_blk_mem_gen_prim_wrapper_init is
@@ -45,8 +47,8 @@ begin
       INITP_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_00 => X"0000000000000000000000000000000034210044342144003421002034011100",
-      INIT_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_00 => X"002408263824FF0000610824302300FE0022082534221100342101013C010101",
+      INIT_01 => X"0000000000000000000000000000000000000000000000000000000000240827",
       INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -177,6 +179,8 @@ entity inst_rom_blk_mem_gen_prim_width is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
 end inst_rom_blk_mem_gen_prim_width;
 
 architecture STRUCTURE of inst_rom_blk_mem_gen_prim_width is
@@ -200,6 +204,8 @@ entity inst_rom_blk_mem_gen_generic_cstr is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
 end inst_rom_blk_mem_gen_generic_cstr;
 
 architecture STRUCTURE of inst_rom_blk_mem_gen_generic_cstr is
@@ -223,6 +229,8 @@ entity inst_rom_blk_mem_gen_top is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_top : entity is "blk_mem_gen_top";
 end inst_rom_blk_mem_gen_top;
 
 architecture STRUCTURE of inst_rom_blk_mem_gen_top is
@@ -246,6 +254,8 @@ entity inst_rom_blk_mem_gen_v8_4_1_synth is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_v8_4_1_synth : entity is "blk_mem_gen_v8_4_1_synth";
 end inst_rom_blk_mem_gen_v8_4_1_synth;
 
 architecture STRUCTURE of inst_rom_blk_mem_gen_v8_4_1_synth is
@@ -474,6 +484,8 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
   attribute C_WRITE_WIDTH_B of inst_rom_blk_mem_gen_v8_4_1 : entity is 32;
   attribute C_XDEVICEFAMILY : string;
   attribute C_XDEVICEFAMILY of inst_rom_blk_mem_gen_v8_4_1 : entity is "artix7";
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_v8_4_1 : entity is "blk_mem_gen_v8_4_1";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of inst_rom_blk_mem_gen_v8_4_1 : entity is "yes";
 end inst_rom_blk_mem_gen_v8_4_1;

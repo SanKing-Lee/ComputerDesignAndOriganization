@@ -7,6 +7,14 @@ text editor: sumblime-text 3
 
 operating system: linux 18.01
 
+**2018.11.13**
+1. tested the logical instructions
+	- created test_logc_inst.coe
+
+**2018.11.11**
+1. finished the execution stage of added instructions
+	- modified the ex.v
+
 **2018.11.10**
 1. finished the decode stage of added instructions
 	- modified the id.v 

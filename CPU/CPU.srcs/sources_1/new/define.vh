@@ -54,11 +54,9 @@
 `define EXE_XOR_OP			8'b00100110			
 `define EXE_NOR_OP			8'b00100111
 `define EXE_SLL_OP 			8'b00000000
-`define EXE_SLLV_OP			8'b00000100
 `define EXE_SRL_OP			8'b00000010
-`define EXE_SRLV_OP			8'b00000110
 `define EXE_SRA_OP			8'b00000011
-`define EXE_SRAV_OP			8'b00000111
+
 `define EXE_SYNC_OP			8'b00001111
 `define EXE_PREF_OP			8'b00110011
 //alu sel code
