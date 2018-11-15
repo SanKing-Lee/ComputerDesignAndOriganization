@@ -6,6 +6,7 @@ vivado version: 2018.1
 text editor: sublime-text 3
 
 operating system: linux 18.01
+
 **2018.11.15**
 1. tested the first part of nop and shift instructions
 	- created test_nop_shift_inst.coe
