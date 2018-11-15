@@ -3,9 +3,17 @@ design a cpu with verilog according to the book《自己动手写CPU》
 
 vivado version: 2018.1
 
-text editor: sumblime-text 3
+text editor: sublime-text 3
 
 operating system: linux 18.01
+**2018.11.15**
+1. tested the first part of nop and shift instructions
+	- created test_nop_shift_inst.coe
+	- interupt the fisrt part of nop and shift instuctions from assembly language to binary
+	- problems
+		- when execute sllv $2, $2, $7, the reg2_addr_o is 12 while 2 is correct
+	- solutions
+		- error occured when interupt this instruction: 00f21004->00e21004
 
 **2018.11.13**
 1. tested the logical instructions
