@@ -7,6 +7,19 @@ text editor: sublime-text 3
 
 operating system: linux 18.01
 
+**2018.11.23**
+1. added the move instructions
+	- modified define.vh
+		- added the opcode and selcode
+	- created hilo_reg.v
+	- modified id.v
+	- modified ex.v
+	- modified ex_mem.v
+	- modified mem.v
+	- modified mem_wb.v
+	- modified openmipsl.v
+		- added the wires 
+
 **2018.11.15**
 1. tested the first part of nop and shift instructions
 	- created test_nop_shift_inst.coe

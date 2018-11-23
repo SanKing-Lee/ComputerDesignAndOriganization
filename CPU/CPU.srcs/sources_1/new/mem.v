@@ -28,18 +28,34 @@ module mem(
 	input wire[`RegBus] wdata_i,
 	output reg wreg_o,
 	output reg[`RegAddrBus] wd_o,
-	output reg[`RegBus] wdata_o
+	output reg[`RegBus] wdata_o,
+
+	//hi_lo input
+	input wire whilo_i,
+	input wire hi_i,
+	input wire lo_i,
+
+	//hi_lo output
+	output reg whilo_o,
+	output reg[`RegBus] hi_o,
+	output reg[`RegBus] lo_o
     );
 	always@(*) begin
 		if(rst == `RstEnable) begin
 			wreg_o <= `WriteDisable;
 			wd_o <= `NOPRegAddr;
 			wdata_o <= `ZeroWord;
+			whilo_o <= `WriteDisable;
+			hi_o <= `ZeroWord;
+			lo_o <= `ZeroWord;
 		end // if(rst == `RstEnable)
 		else begin
 			wreg_o <= wreg_i;
 			wd_o <= wd_i;
 			wdata_o <= wdata_i;
+			whilo_o <= whilo_i;
+			hi_o <= hi_i;
+			lo_o <= lo_i;
 		end // else
 	end // always@(*)
 endmodule
