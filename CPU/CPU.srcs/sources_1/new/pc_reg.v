@@ -25,6 +25,7 @@ module pc_reg(
 	//clk and rst signal
 	input wire clk,
 	input wire rst,
+	input wire[5:0] stall,
 	//output address of instruction
 	output reg[`InstAddrBus] pc,
 	//chip enable
@@ -45,7 +46,7 @@ module pc_reg(
 		if(ce == `ChipDisable) begin
 			pc <= 32'h0000_0000;
 		end
-		else begin
+		else if(stall[0] == `NoStop) begin
 			pc <= pc + 4'h4;
 		end
 	end

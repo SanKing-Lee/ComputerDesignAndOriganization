@@ -1,12 +1,12 @@
 #-----------------------------------------------------------
 # Vivado v2018.1 (64-bit)
-# SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
 # IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-# Start of session at: Wed Oct 17 15:18:38 2018
-# Process ID: 12604
-# Current directory: D:/VivadoCode/CPU/CPU.runs/synth_1
-# Command line: vivado.exe -log openmips.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source openmips.tcl
-# Log file: D:/VivadoCode/CPU/CPU.runs/synth_1/openmips.vds
-# Journal file: D:/VivadoCode/CPU/CPU.runs/synth_1\vivado.jou
+# Start of session at: Mon Nov 26 22:35:57 2018
+# Process ID: 29959
+# Current directory: /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.runs/synth_1
+# Command line: vivado -log openmips_min_sopc.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source openmips_min_sopc.tcl
+# Log file: /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.runs/synth_1/openmips_min_sopc.vds
+# Journal file: /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.runs/synth_1/vivado.jou
 #-----------------------------------------------------------
-source openmips.tcl -notrace
+source openmips_min_sopc.tcl -notrace

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<webTalkData  fileName='usage_statistics_ext_xsim.xml'  majorVersion='1' minorVersion='0' timeStamp='Fri Nov 23 20:30:18 2018'>
+<webTalkData  fileName='usage_statistics_ext_xsim.xml'  majorVersion='1' minorVersion='0' timeStamp='Mon Nov 26 19:32:03 2018'>
 <section name="__ROOT__" level="0" order="1" description="">
  <section name="software_version_and_target_device" level="1" order="1" description="">
   <keyValuePair key="beta" value="FALSE" description="" />
   <keyValuePair key="build_version" value="2188600" description="" />
-  <keyValuePair key="date_generated" value="Fri Nov 23 20:30:17 2018" description="" />
+  <keyValuePair key="date_generated" value="Mon Nov 26 19:32:03 2018" description="" />
   <keyValuePair key="os_platform" value="LIN64" description="" />
   <keyValuePair key="product_version" value="XSIM v2018.1 (64-bit)" description="" />
   <keyValuePair key="project_id" value="3286143081b54d93a5b8cd2df39a5230" description="" />
-  <keyValuePair key="project_iteration" value="67" description="" />
+  <keyValuePair key="project_iteration" value="70" description="" />
   <keyValuePair key="random_id" value="87b44b80-9ea9-4dbc-9f7b-55945ee3259f" description="" />
   <keyValuePair key="registration_id" value="87b44b80-9ea9-4dbc-9f7b-55945ee3259f" description="" />
   <keyValuePair key="route_design" value="FALSE" description="" />
@@ -20,7 +20,7 @@
  </section>
  <section name="user_environment" level="1" order="2" description="">
   <keyValuePair key="cpu_name" value="Intel(R) Core(TM) i5-4460  CPU @ 3.20GHz" description="" />
-  <keyValuePair key="cpu_speed" value="3147.992 MHz" description="" />
+  <keyValuePair key="cpu_speed" value="3203.975 MHz" description="" />
   <keyValuePair key="os_name" value="Ubuntu" description="" />
   <keyValuePair key="os_release" value="Ubuntu 18.04.1 LTS" description="" />
   <keyValuePair key="system_ram" value="8.000 GB" description="" />
@@ -30,24 +30,14 @@
  </section>
  <section name="xsim" level="1" order="4" description="">
   <section name="command_line_options" level="2" order="1" description="">
-   <keyValuePair key="command" value="xelab" description="" />
-   <keyValuePair key="debug" value="typical" description="" />
-   <keyValuePair key="dpi_used" value="false" description="" />
-   <keyValuePair key="file_counter" value="16" description="" />
-   <keyValuePair key="gendll" value="false" description="" />
-   <keyValuePair key="hwcosim" value="false" description="" />
-   <keyValuePair key="sdfmodeling" value="false" description="" />
-   <keyValuePair key="vhdl2008" value="false" description="" />
+   <keyValuePair key="command" value="xsim" description="" />
   </section>
   <section name="usage" level="2" order="2" description="">
-   <keyValuePair key="compiler_memory" value="227160_KB" description="" />
-   <keyValuePair key="compiler_time" value="1.33_sec" description="" />
-   <keyValuePair key="simulation_image_code" value="143 KB" description="" />
-   <keyValuePair key="simulation_image_data" value="18 KB" description="" />
-   <keyValuePair key="total_instances" value="20" description="" />
-   <keyValuePair key="total_nets" value="0" description="" />
-   <keyValuePair key="total_processes" value="278" description="" />
-   <keyValuePair key="xilinx_hdl_libraries_used" value="secureip unimacro_ver unisims_ver " description="" />
+   <keyValuePair key="iteration" value="1" description="" />
+   <keyValuePair key="runtime" value="180 ns" description="" />
+   <keyValuePair key="simulation_memory" value="129668_KB" description="" />
+   <keyValuePair key="simulation_time" value="0.01_sec" description="" />
+   <keyValuePair key="trace_waveform" value="true" description="" />
   </section>
  </section>
 </section>

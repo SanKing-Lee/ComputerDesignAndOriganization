@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Thu Nov 15 20:42:56 2018
+// Date        : Mon Nov 26 22:01:15 2018
 // Host        : shawn-All-Series running 64-bit Ubuntu 18.04.1 LTS
 // Command     : write_verilog -force -mode funcsim
 //               /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/ip/inst_rom/inst_rom_sim_netlist.v
@@ -97,8 +97,8 @@ module inst_rom
   (* C_MEM_TYPE = "3" *) 
   (* C_MUX_PIPELINE_STAGES = "0" *) 
   (* C_PRIM_TYPE = "1" *) 
-  (* C_READ_DEPTH_A = "16" *) 
-  (* C_READ_DEPTH_B = "16" *) 
+  (* C_READ_DEPTH_A = "256" *) 
+  (* C_READ_DEPTH_B = "256" *) 
   (* C_READ_WIDTH_A = "32" *) 
   (* C_READ_WIDTH_B = "32" *) 
   (* C_RSTRAM_A = "0" *) 
@@ -109,14 +109,14 @@ module inst_rom
   (* C_USE_BRAM_BLOCK = "0" *) 
   (* C_USE_BYTE_WEA = "0" *) 
   (* C_USE_BYTE_WEB = "0" *) 
-  (* C_USE_DEFAULT_DATA = "0" *) 
+  (* C_USE_DEFAULT_DATA = "1" *) 
   (* C_USE_ECC = "0" *) 
   (* C_USE_SOFTECC = "0" *) 
   (* C_USE_URAM = "0" *) 
   (* C_WEA_WIDTH = "1" *) 
   (* C_WEB_WIDTH = "1" *) 
-  (* C_WRITE_DEPTH_A = "16" *) 
-  (* C_WRITE_DEPTH_B = "16" *) 
+  (* C_WRITE_DEPTH_A = "256" *) 
+  (* C_WRITE_DEPTH_B = "256" *) 
   (* C_WRITE_MODE_A = "WRITE_FIRST" *) 
   (* C_WRITE_MODE_B = "WRITE_FIRST" *) 
   (* C_WRITE_WIDTH_A = "32" *) 
@@ -198,9 +198,9 @@ module inst_rom_blk_mem_gen_generic_cstr
   output [31:0]douta;
   input clka;
   input ena;
-  input [3:0]addra;
+  input [7:0]addra;
 
-  wire [3:0]addra;
+  wire [7:0]addra;
   wire clka;
   wire [31:0]douta;
   wire ena;
@@ -221,9 +221,9 @@ module inst_rom_blk_mem_gen_prim_width
   output [31:0]douta;
   input clka;
   input ena;
-  input [3:0]addra;
+  input [7:0]addra;
 
-  wire [3:0]addra;
+  wire [7:0]addra;
   wire clka;
   wire [31:0]douta;
   wire ena;
@@ -244,13 +244,13 @@ module inst_rom_blk_mem_gen_prim_wrapper_init
   output [31:0]douta;
   input clka;
   input ena;
-  input [3:0]addra;
+  input [7:0]addra;
 
   wire \DEVICE_7SERIES.WITH_BMM_INFO.SP.WIDE_PRIM18.ram_n_32 ;
   wire \DEVICE_7SERIES.WITH_BMM_INFO.SP.WIDE_PRIM18.ram_n_33 ;
   wire \DEVICE_7SERIES.WITH_BMM_INFO.SP.WIDE_PRIM18.ram_n_34 ;
   wire \DEVICE_7SERIES.WITH_BMM_INFO.SP.WIDE_PRIM18.ram_n_35 ;
-  wire [3:0]addra;
+  wire [7:0]addra;
   wire clka;
   wire [31:0]douta;
   wire ena;
@@ -268,12 +268,12 @@ module inst_rom_blk_mem_gen_prim_wrapper_init
     .INITP_05(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_06(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_07(256'h0000000000000000000000000000000000000000000000000000000000000000),
-    .INIT_00(256'h00E21004000212000000004F340800083405000534070007344204043C020404),
-    .INIT_01(256'h00000000000000000000000000000000000000000000000000A2100600021202),
-    .INIT_02(256'h0000000000000000000000000000000000000000000000000000000000000000),
-    .INIT_03(256'h0000000000000000000000000000000000000000000000000000000000000000),
-    .INIT_04(256'h0000000000000000000000000000000000000000000000000000000000000000),
-    .INIT_05(256'h0000000000000000000000000000000000000000000000000000000000000000),
+    .INIT_00(256'h00411821340300003442000100021400340280003421001000010C0034018000),
+    .INIT_01(256'h3401FFFF24638000340300002063000200621823002318220041182034030000),
+    .INIT_02(256'h70221020702210213C0100002C228000282280000020102B0020102A00010C00),
+    .INIT_03(256'h3C01110070221021702210203C01A10070221021702210203421FFFF3C01FFFF),
+    .INIT_04(256'h0022001870221802340200063421FFFB00010C003401FFFF7022102170221020),
+    .INIT_05(256'h0000000000000000000000000000000000000000000000000000000000220019),
     .INIT_06(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_07(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_08(256'h0000000000000000000000000000000000000000000000000000000000000000),
@@ -358,8 +358,8 @@ module inst_rom_blk_mem_gen_prim_wrapper_init
     .WRITE_WIDTH_A(18),
     .WRITE_WIDTH_B(18)) 
     \DEVICE_7SERIES.WITH_BMM_INFO.SP.WIDE_PRIM18.ram 
-       (.ADDRARDADDR({1'b0,1'b0,1'b0,1'b0,1'b0,addra,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .ADDRBWRADDR({1'b0,1'b0,1'b0,1'b0,1'b0,addra,1'b1,1'b0,1'b0,1'b0,1'b0}),
+       (.ADDRARDADDR({1'b0,addra,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .ADDRBWRADDR({1'b0,addra,1'b1,1'b0,1'b0,1'b0,1'b0}),
         .CLKARDCLK(clka),
         .CLKBWRCLK(clka),
         .DIADI({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -391,9 +391,9 @@ module inst_rom_blk_mem_gen_top
   output [31:0]douta;
   input clka;
   input ena;
-  input [3:0]addra;
+  input [7:0]addra;
 
-  wire [3:0]addra;
+  wire [7:0]addra;
   wire clka;
   wire [31:0]douta;
   wire ena;
@@ -421,13 +421,13 @@ endmodule
 (* C_INITA_VAL = "0" *) (* C_INITB_VAL = "0" *) (* C_INIT_FILE = "inst_rom.mem" *) 
 (* C_INIT_FILE_NAME = "inst_rom.mif" *) (* C_INTERFACE_TYPE = "0" *) (* C_LOAD_INIT_FILE = "1" *) 
 (* C_MEM_TYPE = "3" *) (* C_MUX_PIPELINE_STAGES = "0" *) (* C_PRIM_TYPE = "1" *) 
-(* C_READ_DEPTH_A = "16" *) (* C_READ_DEPTH_B = "16" *) (* C_READ_WIDTH_A = "32" *) 
+(* C_READ_DEPTH_A = "256" *) (* C_READ_DEPTH_B = "256" *) (* C_READ_WIDTH_A = "32" *) 
 (* C_READ_WIDTH_B = "32" *) (* C_RSTRAM_A = "0" *) (* C_RSTRAM_B = "0" *) 
 (* C_RST_PRIORITY_A = "CE" *) (* C_RST_PRIORITY_B = "CE" *) (* C_SIM_COLLISION_CHECK = "ALL" *) 
 (* C_USE_BRAM_BLOCK = "0" *) (* C_USE_BYTE_WEA = "0" *) (* C_USE_BYTE_WEB = "0" *) 
-(* C_USE_DEFAULT_DATA = "0" *) (* C_USE_ECC = "0" *) (* C_USE_SOFTECC = "0" *) 
+(* C_USE_DEFAULT_DATA = "1" *) (* C_USE_ECC = "0" *) (* C_USE_SOFTECC = "0" *) 
 (* C_USE_URAM = "0" *) (* C_WEA_WIDTH = "1" *) (* C_WEB_WIDTH = "1" *) 
-(* C_WRITE_DEPTH_A = "16" *) (* C_WRITE_DEPTH_B = "16" *) (* C_WRITE_MODE_A = "WRITE_FIRST" *) 
+(* C_WRITE_DEPTH_A = "256" *) (* C_WRITE_DEPTH_B = "256" *) (* C_WRITE_MODE_A = "WRITE_FIRST" *) 
 (* C_WRITE_MODE_B = "WRITE_FIRST" *) (* C_WRITE_WIDTH_A = "32" *) (* C_WRITE_WIDTH_B = "32" *) 
 (* C_XDEVICEFAMILY = "artix7" *) (* ORIG_REF_NAME = "blk_mem_gen_v8_4_1" *) (* downgradeipidentifiedwarnings = "yes" *) 
 module inst_rom_blk_mem_gen_v8_4_1
@@ -719,7 +719,7 @@ module inst_rom_blk_mem_gen_v8_4_1
   GND GND
        (.G(\<const0> ));
   inst_rom_blk_mem_gen_v8_4_1_synth inst_blk_mem_gen
-       (.addra(addra[5:2]),
+       (.addra(addra[9:2]),
         .clka(clka),
         .douta(douta),
         .ena(ena));
@@ -734,9 +734,9 @@ module inst_rom_blk_mem_gen_v8_4_1_synth
   output [31:0]douta;
   input clka;
   input ena;
-  input [3:0]addra;
+  input [7:0]addra;
 
-  wire [3:0]addra;
+  wire [7:0]addra;
   wire clka;
   wire [31:0]douta;
   wire ena;

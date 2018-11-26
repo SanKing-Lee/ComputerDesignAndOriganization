@@ -1,7 +1,7 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
--- Date        : Thu Nov 15 20:42:57 2018
+-- Date        : Mon Nov 26 22:01:15 2018
 -- Host        : shawn-All-Series running 64-bit Ubuntu 18.04.1 LTS
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/ip/inst_rom/inst_rom_sim_netlist.vhdl
@@ -19,7 +19,7 @@ entity inst_rom_blk_mem_gen_prim_wrapper_init is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_prim_wrapper_init : entity is "blk_mem_gen_prim_wrapper_init";
@@ -47,12 +47,12 @@ begin
       INITP_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_00 => X"00E21004000212000000004F340800083405000534070007344204043C020404",
-      INIT_01 => X"00000000000000000000000000000000000000000000000000A2100600021202",
-      INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_00 => X"00411821340300003442000100021400340280003421001000010C0034018000",
+      INIT_01 => X"3401FFFF24638000340300002063000200621823002318220041182034030000",
+      INIT_02 => X"70221020702210213C0100002C228000282280000020102B0020102A00010C00",
+      INIT_03 => X"3C01110070221021702210203C01A10070221021702210203421FFFF3C01FFFF",
+      INIT_04 => X"0022001870221802340200063421FFFB00010C003401FFFF7022102170221020",
+      INIT_05 => X"0000000000000000000000000000000000000000000000000000000000220019",
       INIT_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_08 => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -138,11 +138,11 @@ begin
       WRITE_WIDTH_B => 18
     )
         port map (
-      ADDRARDADDR(13 downto 9) => B"00000",
-      ADDRARDADDR(8 downto 5) => addra(3 downto 0),
+      ADDRARDADDR(13) => '0',
+      ADDRARDADDR(12 downto 5) => addra(7 downto 0),
       ADDRARDADDR(4 downto 0) => B"00000",
-      ADDRBWRADDR(13 downto 9) => B"00000",
-      ADDRBWRADDR(8 downto 5) => addra(3 downto 0),
+      ADDRBWRADDR(13) => '0',
+      ADDRBWRADDR(12 downto 5) => addra(7 downto 0),
       ADDRBWRADDR(4 downto 0) => B"10000",
       CLKARDCLK => clka,
       CLKBWRCLK => clka,
@@ -177,7 +177,7 @@ entity inst_rom_blk_mem_gen_prim_width is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
@@ -187,7 +187,7 @@ architecture STRUCTURE of inst_rom_blk_mem_gen_prim_width is
 begin
 \prim_init.ram\: entity work.inst_rom_blk_mem_gen_prim_wrapper_init
      port map (
-      addra(3 downto 0) => addra(3 downto 0),
+      addra(7 downto 0) => addra(7 downto 0),
       clka => clka,
       douta(31 downto 0) => douta(31 downto 0),
       ena => ena
@@ -202,7 +202,7 @@ entity inst_rom_blk_mem_gen_generic_cstr is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
@@ -212,7 +212,7 @@ architecture STRUCTURE of inst_rom_blk_mem_gen_generic_cstr is
 begin
 \ramloop[0].ram.r\: entity work.inst_rom_blk_mem_gen_prim_width
      port map (
-      addra(3 downto 0) => addra(3 downto 0),
+      addra(7 downto 0) => addra(7 downto 0),
       clka => clka,
       douta(31 downto 0) => douta(31 downto 0),
       ena => ena
@@ -227,7 +227,7 @@ entity inst_rom_blk_mem_gen_top is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_top : entity is "blk_mem_gen_top";
@@ -237,7 +237,7 @@ architecture STRUCTURE of inst_rom_blk_mem_gen_top is
 begin
 \valid.cstr\: entity work.inst_rom_blk_mem_gen_generic_cstr
      port map (
-      addra(3 downto 0) => addra(3 downto 0),
+      addra(7 downto 0) => addra(7 downto 0),
       clka => clka,
       douta(31 downto 0) => douta(31 downto 0),
       ena => ena
@@ -252,7 +252,7 @@ entity inst_rom_blk_mem_gen_v8_4_1_synth is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 3 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_v8_4_1_synth : entity is "blk_mem_gen_v8_4_1_synth";
@@ -262,7 +262,7 @@ architecture STRUCTURE of inst_rom_blk_mem_gen_v8_4_1_synth is
 begin
 \gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen\: entity work.inst_rom_blk_mem_gen_top
      port map (
-      addra(3 downto 0) => addra(3 downto 0),
+      addra(7 downto 0) => addra(7 downto 0),
       clka => clka,
       douta(31 downto 0) => douta(31 downto 0),
       ena => ena
@@ -435,9 +435,9 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
   attribute C_PRIM_TYPE : integer;
   attribute C_PRIM_TYPE of inst_rom_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_READ_DEPTH_A : integer;
-  attribute C_READ_DEPTH_A of inst_rom_blk_mem_gen_v8_4_1 : entity is 16;
+  attribute C_READ_DEPTH_A of inst_rom_blk_mem_gen_v8_4_1 : entity is 256;
   attribute C_READ_DEPTH_B : integer;
-  attribute C_READ_DEPTH_B of inst_rom_blk_mem_gen_v8_4_1 : entity is 16;
+  attribute C_READ_DEPTH_B of inst_rom_blk_mem_gen_v8_4_1 : entity is 256;
   attribute C_READ_WIDTH_A : integer;
   attribute C_READ_WIDTH_A of inst_rom_blk_mem_gen_v8_4_1 : entity is 32;
   attribute C_READ_WIDTH_B : integer;
@@ -459,7 +459,7 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
   attribute C_USE_BYTE_WEB : integer;
   attribute C_USE_BYTE_WEB of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_USE_DEFAULT_DATA : integer;
-  attribute C_USE_DEFAULT_DATA of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
+  attribute C_USE_DEFAULT_DATA of inst_rom_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_USE_ECC : integer;
   attribute C_USE_ECC of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_USE_SOFTECC : integer;
@@ -471,9 +471,9 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
   attribute C_WEB_WIDTH : integer;
   attribute C_WEB_WIDTH of inst_rom_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_WRITE_DEPTH_A : integer;
-  attribute C_WRITE_DEPTH_A of inst_rom_blk_mem_gen_v8_4_1 : entity is 16;
+  attribute C_WRITE_DEPTH_A of inst_rom_blk_mem_gen_v8_4_1 : entity is 256;
   attribute C_WRITE_DEPTH_B : integer;
-  attribute C_WRITE_DEPTH_B of inst_rom_blk_mem_gen_v8_4_1 : entity is 16;
+  attribute C_WRITE_DEPTH_B of inst_rom_blk_mem_gen_v8_4_1 : entity is 256;
   attribute C_WRITE_MODE_A : string;
   attribute C_WRITE_MODE_A of inst_rom_blk_mem_gen_v8_4_1 : entity is "WRITE_FIRST";
   attribute C_WRITE_MODE_B : string;
@@ -651,7 +651,7 @@ GND: unisim.vcomponents.GND
     );
 inst_blk_mem_gen: entity work.inst_rom_blk_mem_gen_v8_4_1_synth
      port map (
-      addra(3 downto 0) => addra(5 downto 2),
+      addra(7 downto 0) => addra(9 downto 2),
       clka => clka,
       douta(31 downto 0) => douta(31 downto 0),
       ena => ena
@@ -796,9 +796,9 @@ architecture STRUCTURE of inst_rom is
   attribute C_PRIM_TYPE : integer;
   attribute C_PRIM_TYPE of U0 : label is 1;
   attribute C_READ_DEPTH_A : integer;
-  attribute C_READ_DEPTH_A of U0 : label is 16;
+  attribute C_READ_DEPTH_A of U0 : label is 256;
   attribute C_READ_DEPTH_B : integer;
-  attribute C_READ_DEPTH_B of U0 : label is 16;
+  attribute C_READ_DEPTH_B of U0 : label is 256;
   attribute C_READ_WIDTH_A : integer;
   attribute C_READ_WIDTH_A of U0 : label is 32;
   attribute C_READ_WIDTH_B : integer;
@@ -820,7 +820,7 @@ architecture STRUCTURE of inst_rom is
   attribute C_USE_BYTE_WEB : integer;
   attribute C_USE_BYTE_WEB of U0 : label is 0;
   attribute C_USE_DEFAULT_DATA : integer;
-  attribute C_USE_DEFAULT_DATA of U0 : label is 0;
+  attribute C_USE_DEFAULT_DATA of U0 : label is 1;
   attribute C_USE_ECC : integer;
   attribute C_USE_ECC of U0 : label is 0;
   attribute C_USE_SOFTECC : integer;
@@ -832,9 +832,9 @@ architecture STRUCTURE of inst_rom is
   attribute C_WEB_WIDTH : integer;
   attribute C_WEB_WIDTH of U0 : label is 1;
   attribute C_WRITE_DEPTH_A : integer;
-  attribute C_WRITE_DEPTH_A of U0 : label is 16;
+  attribute C_WRITE_DEPTH_A of U0 : label is 256;
   attribute C_WRITE_DEPTH_B : integer;
-  attribute C_WRITE_DEPTH_B of U0 : label is 16;
+  attribute C_WRITE_DEPTH_B of U0 : label is 256;
   attribute C_WRITE_MODE_A : string;
   attribute C_WRITE_MODE_A of U0 : label is "WRITE_FIRST";
   attribute C_WRITE_MODE_B : string;

@@ -7,6 +7,39 @@ text editor: sublime-text 3
 
 operating system: linux 18.01
 
+**2018.11.26**
+1. tested nop and shift instructions
+	- modified test_nop_shift_inst.coe
+2. tested move instructions
+	- modified test_move_inst.coe
+	- problems
+		- the wire ex_whilo_o mistaked to ex_whilo_0
+	- solutions
+		- correct it
+3. tested arithmetic instructions
+	- created test_arithmeticl_inst.coe
+	- problems
+		- erros occured when carry out slti instruction 
+		- ex.opdata1_mult and opdata2_mult error, assign failed
+	- solutions
+		- add the \`EXE_SLTI_OP in ex.v
+		- correct the assign 
+
+**2018.11.25**
+1. added the stall mechanism
+	- created ctrl.v
+	- modified define.vh, ex.v, ex_mem.v, id.v, id_ex.v, mem_wb.v, openmips.v, pc_reg.v
+		- added stall conditions
+
+
+**2018.11.24**
+1. added the arithmetic instructions
+	- modified define.vh
+		- added the opcode and selcode
+	- modified id.v
+		- added the decode stage of each instruction
+	- modified ex.v
+
 **2018.11.23**
 1. added the move instructions
 	- modified define.vh

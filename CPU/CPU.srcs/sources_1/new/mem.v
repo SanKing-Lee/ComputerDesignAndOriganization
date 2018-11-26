@@ -32,8 +32,8 @@ module mem(
 
 	//hi_lo input
 	input wire whilo_i,
-	input wire hi_i,
-	input wire lo_i,
+	input wire[`RegBus] hi_i,
+	input wire[`RegBus] lo_i,
 
 	//hi_lo output
 	output reg whilo_o,
