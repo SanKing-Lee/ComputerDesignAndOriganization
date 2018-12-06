@@ -7,6 +7,29 @@ text editor: sublime-text 3
 
 operating system: linux 18.01
 
+**2018.12.6**
+1. added branch instructions 
+	- modified define.vh, id.v,
+
+**2018.12.4**
+1. added div instruction
+	- created div.v
+	- modified define.vh, id.v, ex.v
+		- added the opcode 
+2. tested div instructions
+	- created test_div_inst.coe 
+	- problems
+		- the temp_op1 and temp_op2 is unblocked assignment in the div.v
+		- get into the div_end state incorrectly
+	- solutions 
+		- have them turned into blocked assignment
+		- reposition the state change code in the divon state
+
+
+**2018.12.3**
+1. tested madd and msub instructions
+	- created test_maddandmsub_inst.coe
+
 **2018.11.26**
 1. tested nop and shift instructions
 	- modified test_nop_shift_inst.coe
@@ -22,7 +45,7 @@ operating system: linux 18.01
 		- erros occured when carry out slti instruction 
 		- ex.opdata1_mult and opdata2_mult error, assign failed
 	- solutions
-		- add the \`EXE_SLTI_OP in ex.v
+		- add the EXE_SLTI_OP in ex.v
 		- correct the assign 
 
 **2018.11.25**

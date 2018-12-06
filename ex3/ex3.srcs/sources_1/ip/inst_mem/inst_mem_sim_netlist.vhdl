@@ -1,9 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
--- Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
--- Date        : Sun Nov 18 17:57:31 2018
--- Host        : shawn-All-Series running 64-bit Ubuntu 18.04.1 LTS
--- Command     : write_vhdl -force -mode funcsim /home/shawn/ex3/ex3.srcs/sources_1/ip/inst_mem/inst_mem_sim_netlist.vhdl
+-- Tool Version: Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
+-- Date        : Mon Nov 19 16:17:57 2018
+-- Host        : DESKTOP-FAD05NK running 64-bit major release  (build 9200)
+-- Command     : write_vhdl -force -mode funcsim -rename_top inst_mem -prefix
+--               inst_mem_ inst_mem_sim_netlist.vhdl
 -- Design      : inst_mem
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -20,8 +21,6 @@ entity inst_mem_blk_mem_gen_prim_wrapper_init is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of inst_mem_blk_mem_gen_prim_wrapper_init : entity is "blk_mem_gen_prim_wrapper_init";
 end inst_mem_blk_mem_gen_prim_wrapper_init;
 
 architecture STRUCTURE of inst_mem_blk_mem_gen_prim_wrapper_init is
@@ -36,8 +35,8 @@ architecture STRUCTURE of inst_mem_blk_mem_gen_prim_wrapper_init is
 begin
 \DEVICE_7SERIES.WITH_BMM_INFO.SP.WIDE_PRIM18.ram\: unisim.vcomponents.RAMB18E1
     generic map(
-      DOA_REG => 1,
-      DOB_REG => 1,
+      DOA_REG => 0,
+      DOB_REG => 0,
       INITP_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -157,8 +156,8 @@ begin
       DOPBDOP(0) => \DEVICE_7SERIES.WITH_BMM_INFO.SP.WIDE_PRIM18.ram_n_35\,
       ENARDEN => ena,
       ENBWREN => ena,
-      REGCEAREGCE => ena,
-      REGCEB => ena,
+      REGCEAREGCE => '0',
+      REGCEB => '0',
       RSTRAMARSTRAM => '0',
       RSTRAMB => '0',
       RSTREGARSTREG => '0',
@@ -178,8 +177,6 @@ entity inst_mem_blk_mem_gen_prim_width is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of inst_mem_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
 end inst_mem_blk_mem_gen_prim_width;
 
 architecture STRUCTURE of inst_mem_blk_mem_gen_prim_width is
@@ -203,8 +200,6 @@ entity inst_mem_blk_mem_gen_generic_cstr is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of inst_mem_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
 end inst_mem_blk_mem_gen_generic_cstr;
 
 architecture STRUCTURE of inst_mem_blk_mem_gen_generic_cstr is
@@ -228,8 +223,6 @@ entity inst_mem_blk_mem_gen_top is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of inst_mem_blk_mem_gen_top : entity is "blk_mem_gen_top";
 end inst_mem_blk_mem_gen_top;
 
 architecture STRUCTURE of inst_mem_blk_mem_gen_top is
@@ -253,8 +246,6 @@ entity inst_mem_blk_mem_gen_v8_4_1_synth is
     ena : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of inst_mem_blk_mem_gen_v8_4_1_synth : entity is "blk_mem_gen_v8_4_1_synth";
 end inst_mem_blk_mem_gen_v8_4_1_synth;
 
 architecture STRUCTURE of inst_mem_blk_mem_gen_v8_4_1_synth is
@@ -396,7 +387,7 @@ entity inst_mem_blk_mem_gen_v8_4_1 is
   attribute C_HAS_INJECTERR : integer;
   attribute C_HAS_INJECTERR of inst_mem_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_A : integer;
-  attribute C_HAS_MEM_OUTPUT_REGS_A of inst_mem_blk_mem_gen_v8_4_1 : entity is 1;
+  attribute C_HAS_MEM_OUTPUT_REGS_A of inst_mem_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_B : integer;
   attribute C_HAS_MEM_OUTPUT_REGS_B of inst_mem_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_HAS_MUX_OUTPUT_REGS_A : integer;
@@ -483,8 +474,6 @@ entity inst_mem_blk_mem_gen_v8_4_1 is
   attribute C_WRITE_WIDTH_B of inst_mem_blk_mem_gen_v8_4_1 : entity is 32;
   attribute C_XDEVICEFAMILY : string;
   attribute C_XDEVICEFAMILY of inst_mem_blk_mem_gen_v8_4_1 : entity is "artix7";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of inst_mem_blk_mem_gen_v8_4_1 : entity is "blk_mem_gen_v8_4_1";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of inst_mem_blk_mem_gen_v8_4_1 : entity is "yes";
 end inst_mem_blk_mem_gen_v8_4_1;
@@ -757,7 +746,7 @@ architecture STRUCTURE of inst_mem is
   attribute C_HAS_INJECTERR : integer;
   attribute C_HAS_INJECTERR of U0 : label is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_A : integer;
-  attribute C_HAS_MEM_OUTPUT_REGS_A of U0 : label is 1;
+  attribute C_HAS_MEM_OUTPUT_REGS_A of U0 : label is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_B : integer;
   attribute C_HAS_MEM_OUTPUT_REGS_B of U0 : label is 0;
   attribute C_HAS_MUX_OUTPUT_REGS_A : integer;

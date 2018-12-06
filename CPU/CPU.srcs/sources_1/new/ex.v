@@ -58,7 +58,15 @@ module ex(
 	//count the clock
 	input wire[1:0] cnt_i,
 	output reg[`DoubleRegBus] hilo_temp_o,
-	output reg[1:0] cnt_o
+	output reg[1:0] cnt_o,
+
+	//division
+	output reg signed_div_o,
+	output reg[`RegBus] div_opdata1_o,
+	output reg[`RegBus] div_opdata2_o,
+	output reg div_start_o,
+	input wire[`DoubleRegBus] div_result_i,
+	input wire div_ready_i
     );
 	//logical output
 	reg[`RegBus] logicout;
@@ -92,7 +100,9 @@ module ex(
 	wire[`DoubleRegBus] hilo_temp;
 	reg[`DoubleRegBus] mulres;
 	reg[`DoubleRegBus] hilo_temp1;
+	//stall request
 	reg stallreq_for_madd_msub;
+	reg stallreq_for_div;
 
 	assign reg2_i_mux =    ((aluop_i == `EXE_SUB_OP) 	||
 							(aluop_i == `EXE_SUBU_OP) 	||
@@ -273,9 +283,84 @@ module ex(
 		end // else
 	end // always@(*)
 
+	//division
+	always@(*) begin
+		if(rst == `RstEnable) begin
+			stallreq_for_div <= `NoStop;
+			div_opdata1_o <= `ZeroWord;
+			div_opdata2_o <= `ZeroWord;
+			div_start_o <= `DivStop;
+			signed_div_o <= 1'b0;
+		end // if(rst == `RstEnable)
+		else begin
+			//default configuration
+			stallreq_for_div <= `NoStop;
+			div_opdata1_o <= `ZeroWord;
+			div_opdata2_o <= `ZeroWord;
+			div_start_o <= `DivStop;
+			signed_div_o <= 1'b0;
+			case(aluop_i) 
+				`EXE_DIV_OP: begin
+					//start division
+					if(div_ready_i == `DivResultNotReady) begin
+						div_opdata1_o <= reg1_i;
+						div_opdata2_o <= reg2_i;
+						div_start_o <= `DivStart;
+						signed_div_o <= 1'b1;
+						stallreq_for_div <= `Stop;
+					end // if(div_ready_i == `DivResultNotReady)
+					//finished division
+					else if(div_ready_i == `DivResultReady) begin
+						div_opdata1_o <= reg1_i;
+						div_opdata2_o <= reg2_i;
+						div_start_o <= `DivStop;
+						signed_div_o <= 1'b1;
+						stallreq_for_div <= `NoStop;
+					end // else if(div_ready_i == `DivResultReady)
+					//default
+					else begin
+						stallreq_for_div <= `NoStop;
+						div_opdata1_o <= `ZeroWord;
+						div_opdata2_o <= `ZeroWord;
+						div_start_o <= `DivStop;
+						signed_div_o <= 1'b0;
+					end // else
+				end // default:
+				`EXE_DIVU_OP: begin
+					//start division
+					if(div_ready_i == `DivResultNotReady) begin
+						div_opdata1_o <= reg1_i;
+						div_opdata2_o <= reg2_i;
+						div_start_o <= `DivStart;
+						signed_div_o <= 1'b0;
+						stallreq_for_div <= `Stop;
+					end // if(div_ready_i == `DivResultNotReady)
+					//finished division
+					else if(div_ready_i == `DivResultReady) begin
+						div_opdata1_o <= reg1_i;
+						div_opdata2_o <= reg2_i;
+						div_start_o <= `DivStop;
+						signed_div_o <= 1'b0;
+						stallreq_for_div <= `NoStop;
+					end // else if(div_ready_i == `DivResultReady)
+					//default
+					else begin
+						stallreq_for_div <= `NoStop;
+						div_opdata1_o <= `ZeroWord;
+						div_opdata2_o <= `ZeroWord;
+						div_start_o <= `DivStop;
+						signed_div_o <= 1'b0;
+					end // else
+				end
+				default: begin
+				end // default:
+			endcase // aluop_i
+		end
+	end // always@(*)
+
 	//set stallreq
 	always@(*) begin
-		stallreq = stallreq_for_madd_msub;
+		stallreq = stallreq_for_madd_msub || stallreq_for_div;
 	end // always@(*)
 
 	//set logicout according ot the operation code
@@ -430,6 +515,11 @@ module ex(
 			hi_o <= mulres[63:32];
 			lo_o <= mulres[31:0];
 		end // else if((aluop_i == `EXE_MULT_OP) || (aluop_i == `EXE_MULTU_OP))
+		else if((aluop_i == `EXE_DIV_OP) || (aluop_i == `EXE_DIVU_OP)) begin
+			whilo_o <= `WriteEnable;
+			hi_o <= div_result_i[63:32];
+			lo_o <= div_result_i[31:0];
+		end // else if((aluop_i == `EXE_DIV_OP) || (aluop_i == `EXE_DIVU_OP))
 		else begin
 			case(aluop_i)
 				`EXE_MTHI_OP: begin

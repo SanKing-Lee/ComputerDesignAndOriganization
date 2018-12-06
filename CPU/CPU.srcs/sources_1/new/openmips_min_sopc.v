@@ -32,5 +32,5 @@ module openmips_min_sopc(
 		,.rom_addr_o(inst_addr),.rom_data_i(inst)
 		,.rom_ce_o  (rom_ce));
 
-	inst_rom inst_rom0(.addra(inst_addr),.ena(rom_ce),.douta(inst),.clka(clk));
+	inst_rom inst_rom0(.addra(inst_addr),.ena(rom_ce),.douta(inst),.clka(~clk));
 endmodule

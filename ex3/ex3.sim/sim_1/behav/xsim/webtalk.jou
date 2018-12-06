@@ -1,12 +1,12 @@
 #-----------------------------------------------------------
 # Webtalk v2018.1 (64-bit)
-# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
 # IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-# Start of session at: Sun Nov 18 16:35:53 2018
-# Process ID: 11804
-# Current directory: /home/shawn/ex3/ex3.sim/sim_1/behav/xsim
-# Command line: wbtcv -mode batch -source /home/shawn/ex3/ex3.sim/sim_1/behav/xsim/xsim.dir/testbench_behav/webtalk/xsim_webtalk.tcl -notrace
-# Log file: /home/shawn/ex3/ex3.sim/sim_1/behav/xsim/webtalk.log
-# Journal file: /home/shawn/ex3/ex3.sim/sim_1/behav/xsim/webtalk.jou
+# Start of session at: Tue Dec  4 21:21:52 2018
+# Process ID: 5140
+# Current directory: D:/Repositories/ComputerDesignAndOriganization/ex3/ex3.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source D:/Repositories/ComputerDesignAndOriganization/ex3/ex3.sim/sim_1/behav/xsim/xsim.dir/testbench_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: D:/Repositories/ComputerDesignAndOriganization/ex3/ex3.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: D:/Repositories/ComputerDesignAndOriganization/ex3/ex3.sim/sim_1/behav/xsim\webtalk.jou
 #-----------------------------------------------------------
-source /home/shawn/ex3/ex3.sim/sim_1/behav/xsim/xsim.dir/testbench_behav/webtalk/xsim_webtalk.tcl -notrace
+source D:/Repositories/ComputerDesignAndOriganization/ex3/ex3.sim/sim_1/behav/xsim/xsim.dir/testbench_behav/webtalk/xsim_webtalk.tcl -notrace

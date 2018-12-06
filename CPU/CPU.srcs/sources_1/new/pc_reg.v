@@ -29,7 +29,12 @@ module pc_reg(
 	//output address of instruction
 	output reg[`InstAddrBus] pc,
 	//chip enable
-	output reg ce
+	output reg ce,
+	//branch
+	//branch or not
+	input wire branch_flag_i,
+	//where to branch 
+	input wire[`RegBus] branch_target_address_i
     );
 	//set ce according to rst
 	always@(posedge clk) begin
@@ -47,6 +52,9 @@ module pc_reg(
 			pc <= 32'h0000_0000;
 		end
 		else if(stall[0] == `NoStop) begin
+			if(branch_flag_i == `Branch) begin
+				pc <= branch_target_address_i;
+			end
 			pc <= pc + 4'h4;
 		end
 	end

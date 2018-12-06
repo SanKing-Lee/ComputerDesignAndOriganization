@@ -1,9 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Sun Nov 18 17:57:31 2018
-// Host        : shawn-All-Series running 64-bit Ubuntu 18.04.1 LTS
-// Command     : write_verilog -force -mode synth_stub /home/shawn/ex3/ex3.srcs/sources_1/ip/inst_mem/inst_mem_stub.v
+// Tool Version: Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
+// Date        : Mon Nov 19 16:17:57 2018
+// Host        : DESKTOP-FAD05NK running 64-bit major release  (build 9200)
+// Command     : write_verilog -force -mode synth_stub -rename_top inst_mem -prefix
+//               inst_mem_ inst_mem_stub.v
 // Design      : inst_mem
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tcsg324-1

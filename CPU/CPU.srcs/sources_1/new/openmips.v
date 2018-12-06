@@ -99,6 +99,14 @@ module openmips(
 	wire[`RegBus] reg1_data, reg2_data;
 	wire[`RegAddrBus] reg1_addr, reg2_addr;
 
+	//div
+	wire signed_div;
+	wire[`RegBus] opdata1_div;
+	wire[`RegBus] opdata2_div;
+	wire div_start;
+	wire div_ready;
+	wire[`DoubleRegBus] div_result;
+
 	//ctrl
 	ctrl ctrl0(.rst(rst),.stallreq_from_id(stallreq_from_id_i),.stallreq_from_ex(stallreq_from_ex_i),.stall(stall_o));
 	//pc_reg
@@ -231,6 +239,13 @@ module openmips(
 		,.cnt_i 		(ex_cnt_i)
 		,.hilo_temp_o   (ex_hilotemp_o)
 		,.cnt_o   		(ex_cnt_o)
+		//div
+		,.signed_div_o 	(signed_div)
+		,.div_opdata1_o	(opdata1_div)
+		,.div_opdata2_o	(opdata2_div)
+		,.div_start_o  	(div_start)
+		,.div_result_i 	(div_result)
+		,.div_ready_i  	(div_ready)
 		);
 	//ex_mem
 	ex_mem ex_mem0(
@@ -295,5 +310,17 @@ module openmips(
 		,.stall    (stall_o)
 		);
 
-
+	//div
+	div div0(
+		.rst         	(rst)
+		,.clk        	(clk)
+		,.signed_div_i	(signed_div)
+		,.opdata1_i   	(opdata1_div)
+		,.opdata2_i  	(opdata2_div)
+		,.start_i     	(div_start)
+		,.annul_i     	(1'b0)
+		,.result_o    	(div_result)
+		,.ready_o    	(div_ready)
+		);
+	
 endmodule

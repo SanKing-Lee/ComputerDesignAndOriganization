@@ -39,6 +39,6 @@ module top(
    	assign data_wea = {4{memwrite}};
 
 	mips mips(clk,rst,inst_ce, pc,instr,memwrite,dataadr,writedata,readdata);
-	inst_mem imem(.clka(clk),.ena(inst_ce),.addra(pc),.douta(instr));
-	data_mem dmem(.addra(dataadr), .clka(clk), .wea(data_wea),.dina(writedata),.douta(readdata));
+	inst_mem imem(.clka(~clk),.ena(inst_ce),.addra(pc),.douta(instr));
+	data_mem dmem(.addra(dataadr), .clka(~clk), .wea(data_wea),.dina(writedata),.douta(readdata));
 endmodule

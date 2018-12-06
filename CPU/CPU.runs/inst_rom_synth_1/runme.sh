@@ -6,21 +6,25 @@
 # Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 # 
 
+echo "This script was generated under a different operating system."
+echo "Please update the PATH and LD_LIBRARY_PATH variables below, before executing this script"
+exit
+
 if [ -z "$PATH" ]; then
-  PATH=/home/shawn/Xilinx/SDK/2018.1/bin:/home/shawn/Xilinx/Vivado/2018.1/ids_lite/ISE/bin/lin64:/home/shawn/Xilinx/Vivado/2018.1/bin
+  PATH=C:/Xilinx/SDK/2018.1/bin;C:/Xilinx/Vivado/2018.1/ids_lite/ISE/bin/nt64;C:/Xilinx/Vivado/2018.1/ids_lite/ISE/lib/nt64:C:/Xilinx/Vivado/2018.1/bin
 else
-  PATH=/home/shawn/Xilinx/SDK/2018.1/bin:/home/shawn/Xilinx/Vivado/2018.1/ids_lite/ISE/bin/lin64:/home/shawn/Xilinx/Vivado/2018.1/bin:$PATH
+  PATH=C:/Xilinx/SDK/2018.1/bin;C:/Xilinx/Vivado/2018.1/ids_lite/ISE/bin/nt64;C:/Xilinx/Vivado/2018.1/ids_lite/ISE/lib/nt64:C:/Xilinx/Vivado/2018.1/bin:$PATH
 fi
 export PATH
 
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH=/home/shawn/Xilinx/Vivado/2018.1/ids_lite/ISE/lib/lin64
+  LD_LIBRARY_PATH=
 else
-  LD_LIBRARY_PATH=/home/shawn/Xilinx/Vivado/2018.1/ids_lite/ISE/lib/lin64:$LD_LIBRARY_PATH
+  LD_LIBRARY_PATH=:$LD_LIBRARY_PATH
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='/home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.runs/inst_rom_synth_1'
+HD_PWD='D:/Repositories/ComputerDesignAndOriganization/CPU/CPU.runs/inst_rom_synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
