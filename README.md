@@ -7,6 +7,16 @@ text editor: sublime-text 3
 
 operating system: linux 18.01
 
+**2018.12.7**
+1. branch instructions
+	- modified ex.v
+2. test branch instructions
+	- created test_jump_inst.coe 
+	- problems
+		- no else condition in the pc_reg.v, which contributes to an error jump
+	- solutions
+		- added the else in the pc_reg.v
+
 **2018.12.6**
 1. added branch instructions 
 	- modified define.vh, id.v,

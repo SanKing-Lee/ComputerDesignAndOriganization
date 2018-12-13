@@ -62,7 +62,10 @@ module id(
 	//the returned address to be saved
 	output reg[`InstAddrBus] link_addr_o,
 	//the next instruction is in delayslot or not
-	output reg next_inst_in_delayslot_o
+	output reg next_inst_in_delayslot_o,
+
+	//output instruction
+	output wire[`InstBus] inst_o
     );
 	//operation code
 	wire[5:0] op = inst_i[31:26];
@@ -85,6 +88,8 @@ module id(
 	assign pc_plus_8 = pc_i + 8;
 	assign pc_plus_4 = pc_i + 4;
 	assign imm_sll2_signedext = {{14{inst_i[15]}},inst_i[15:0],2'b00};
+
+	assign inst_o = inst_i;
 
 	//decode the instruction
 	always@(*) begin
@@ -541,6 +546,109 @@ module id(
 						next_inst_in_delayslot_o <= `InDelaySlot;
 						branch_target_address_o <= pc_plus_4 + imm_sll2_signedext;
 					end
+				end
+				`EXE_LB: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_LB_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadDisable;
+					wreg_o <= `WriteEnable;
+					wd_o <= inst_i[20:16];
+				end
+				`EXE_LBU: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_LBU_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadDisable;
+					wreg_o <= `WriteEnable;
+					wd_o <= inst_i[20:16];
+				end
+				`EXE_LH: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_LH_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadDisable;
+					wreg_o <= `WriteEnable;
+					wd_o <= inst_i[20:16];
+				end
+				`EXE_LHU: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_LHU_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadDisable;
+					wreg_o <= `WriteEnable;
+					wd_o <= inst_i[20:16];
+				end
+				`EXE_LW: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_LW_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadDisable;
+					wreg_o <= `WriteEnable;
+					wd_o <= inst_i[20:16];
+				end
+				`EXE_LWL: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_LWL_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadDisable;
+					wreg_o <= `WriteEnable;
+					wd_o <= inst_i[20:16];
+				end
+				`EXE_LWR: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_LWR_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadDisable;
+					wreg_o <= `WriteEnable;
+					wd_o <= inst_i[20:16];
+				end				
+				`EXE_SB: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_SB_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadEnable;
+					wreg_o <= `WriteDisable;
+				end				
+				`EXE_SH: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_SH_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadEnable;
+					wreg_o <= `WriteDisable;
+				end				
+				`EXE_SW: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_SW_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadEnable;
+					wreg_o <= `WriteDisable;
+				end				
+				`EXE_SWL: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_SWL_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadEnable;
+					wreg_o <= `WriteDisable;
+				end				
+				`EXE_SWR: begin
+					instvalid <= `InstValid;
+					aluop_o <= `EXE_SWR_OP;
+					alusel_o <= `EXE_RES_LOAD_STORE;
+					reg1_read_o <= `ReadEnable;
+					reg2_read_o <= `ReadEnable;
+					wreg_o <= `WriteDisable;
 				end
 				`EXE_REGIMM_INST: begin
 					case(op4) 

@@ -66,7 +66,16 @@ module ex(
 	output reg[`RegBus] div_opdata2_o,
 	output reg div_start_o,
 	input wire[`DoubleRegBus] div_result_i,
-	input wire div_ready_i
+	input wire div_ready_i,
+
+	//branch instructions
+	input wire is_in_delayslot_i,
+	input wire[`InstAddrBus] link_address_i,
+
+	input wire[`InstBus] inst_i,
+	output reg[`AluOpBus] aluop_o,
+	output reg[`InstAddrBus] mem_addr_o,
+	output reg[`RegBus] reg2_o
     );
 	//logical output
 	reg[`RegBus] logicout;
@@ -119,6 +128,10 @@ module ex(
 							(reg1_i < reg2_i);	
 
 	assign reg1_i_not = ~reg1_i;
+
+	assign aluop_o = aluop_i;
+	assign mem_addr_o = reg1_i + {{16{inst_i[15]}}, inst_i[15:0]};
+	assign reg2_o = reg2_i;
 
 	//set arithmeticres 
 	always@(*) begin
@@ -485,6 +498,9 @@ module ex(
 			end
 			`EXE_RES_MUL: begin
 				wdata_o <= mulres[31:0];
+			end
+			`EXE_RES_JUMP_BRANCH: begin 
+				wdata_o <= link_address_i;
 			end
 			default: begin
 				wdata_o <= `ZeroWord;

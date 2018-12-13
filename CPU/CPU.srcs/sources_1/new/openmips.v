@@ -31,6 +31,7 @@ module openmips(
 	wire[`InstAddrBus] pc;
 	wire[`InstBus] id_inst_i;
 	wire[`InstAddrBus] id_pc_i;
+	wire id_is_in_delayslot_i;
 
 	//id output
 	wire[`AluOpBus] id_aluop_o;
@@ -39,6 +40,11 @@ module openmips(
 	wire[`RegBus] id_reg2_o;
 	wire id_wreg_o;
 	wire[`RegAddrBus] id_wd_o;
+	wire id_is_in_delayslot_o;
+	wire[`InstAddrBus] id_link_address_o;
+	wire id_next_inst_in_delayslot_o;
+	wire[`InstAddrBus] id_branch_target_address_o;
+	wire id_branch_flag_o;
 
 	//ex input
 	//from id_ex
@@ -54,6 +60,9 @@ module openmips(
 	//madd, msub
 	wire[`DoubleRegBus] ex_hilotemp_i;
 	wire[1:0] ex_cnt_i;
+	//branch
+	wire ex_is_in_delayslot_i;
+	wire[`InstAddrBus] ex_link_address_i;
 
 	//ex output
 	wire ex_wreg_o;
@@ -108,9 +117,21 @@ module openmips(
 	wire[`DoubleRegBus] div_result;
 
 	//ctrl
-	ctrl ctrl0(.rst(rst),.stallreq_from_id(stallreq_from_id_i),.stallreq_from_ex(stallreq_from_ex_i),.stall(stall_o));
+	ctrl ctrl0(
+		.rst 				(rst)
+		,.stallreq_from_id 	(stallreq_from_id_i)
+		,.stallreq_from_ex 	(stallreq_from_ex_i)
+		,.stall 			(stall_o)
+		);
 	//pc_reg
-	pc_reg pc_reg0(.clk(clk),.rst(rst),.pc(pc),.ce(rom_ce_o),.stall(stall_o));
+	pc_reg pc_reg0(
+		.clk(clk),.rst(rst)
+		,.pc 						(pc)
+		,.ce 						(rom_ce_o)
+		,.stall 					(stall_o)
+		,.branch_flag_i 			(id_branch_flag_o)
+		,.branch_target_address_i 	(id_branch_target_address_o)
+		);
 	assign rom_addr_o = pc;
 
 	//hilo_reg
@@ -154,35 +175,42 @@ module openmips(
 		);
 	//id
 	id id0(
-		.rst 			(rst)
+		.rst 						(rst)
 		//from if_id
-		,.pc_i 			(id_pc_i)	
-		,.inst_i  		(id_inst_i)
+		,.pc_i 						(id_pc_i)	
+		,.inst_i  					(id_inst_i)
 		//from regfile
-		,.reg1_data_i 	(reg1_data)
-		,.reg2_data_i 	(reg2_data)
+		,.reg1_data_i 				(reg1_data)
+		,.reg2_data_i 				(reg2_data)
 		//to regfile
-		,.reg1_read_o 	(reg1_read)
-		,.reg2_read_o 	(reg2_read)
-		,.reg1_addr_o 	(reg1_addr)
-		,.reg2_addr_o 	(reg2_addr)
+		,.reg1_read_o 				(reg1_read)
+		,.reg2_read_o 				(reg2_read)
+		,.reg1_addr_o 				(reg1_addr)
+		,.reg2_addr_o 				(reg2_addr)
 		//to id_ex
-		,.aluop_o 		(id_aluop_o)	
-		,.alusel_o  	(id_alusel_o)
-		,.reg1_o 		(id_reg1_o)		
-		,.reg2_o 		(id_reg2_o)
-		,.wd_o 			(id_wd_o)			
-		,.wreg_o 		(id_wreg_o)
+		,.aluop_o 					(id_aluop_o)	
+		,.alusel_o  				(id_alusel_o)
+		,.reg1_o 					(id_reg1_o)		
+		,.reg2_o 					(id_reg2_o)
+		,.wd_o 						(id_wd_o)			
+		,.wreg_o 					(id_wreg_o)
 		//data forwarding from ex
-		,.ex_wreg_i  	(ex_wreg_o)	
-		,.ex_wd_i    	(ex_wd_o)
-		,.ex_wdata_i 	(ex_wdata_o)
+		,.ex_wreg_i  				(ex_wreg_o)	
+		,.ex_wd_i    				(ex_wd_o)
+		,.ex_wdata_i 				(ex_wdata_o)
 		//data forwarding from mem
-		,.mem_wreg_i 	(mem_wreg_o)	
-		,.mem_wd_i   	(mem_wd_o)
-		,.mem_wdata_i 	(mem_wdata_o)
+		,.mem_wreg_i 				(mem_wreg_o)	
+		,.mem_wd_i   				(mem_wd_o)
+		,.mem_wdata_i 				(mem_wdata_o)
 		//stall to ctrl 
-		,.stallreq      (stallreq_from_id_i)
+		,.stallreq      			(stallreq_from_id_i)
+		//delay slot
+		,.is_in_delayslot_i 		(id_is_in_delayslot_i)
+		,.branch_flag_o     		(id_branch_flag_o)
+		,.branch_target_address_o 	(id_branch_target_address_o)
+		,.is_in_delayslot_o       	(id_is_in_delayslot_o)
+		,.link_addr_o             	(id_link_address_o)
+		,.next_inst_in_delayslot_o	(id_next_inst_in_delayslot_o)
 		);
 	//id_ex
 	id_ex id_ex0(
@@ -203,6 +231,13 @@ module openmips(
 		,.ex_wreg  (ex_wreg_i)
 		//stall from ctrl
 		,.stall    (stall_o)
+		//branch
+		,.id_is_in_delayslot      (id_is_in_delayslot_o)
+		,.id_link_address         (id_link_address_o)
+		,.next_inst_in_delayslot_i(id_next_inst_in_delayslot_o)
+		,.ex_is_in_delayslot      (ex_is_in_delayslot_i)
+		,.ex_link_address         (ex_link_address_i)
+		,.is_in_delayslot_o       (id_is_in_delayslot_i)
 		);
 	//ex
 	ex ex0(
@@ -246,6 +281,9 @@ module openmips(
 		,.div_start_o  	(div_start)
 		,.div_result_i 	(div_result)
 		,.div_ready_i  	(div_ready)
+		//branch
+		,.is_in_delayslot_i(ex_is_in_delayslot_i)
+		,.link_address_i   (ex_link_address_i)
 		);
 	//ex_mem
 	ex_mem ex_mem0(

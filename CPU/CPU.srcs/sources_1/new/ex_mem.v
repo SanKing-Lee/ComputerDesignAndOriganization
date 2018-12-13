@@ -47,7 +47,15 @@ module ex_mem(
 	input wire[`DoubleRegBus] hilo_i,
 	input wire[1:0] cnt_i,
 	output reg[`DoubleRegBus] hilo_o,
-	output reg[1:0] cnt_o
+	output reg[1:0] cnt_o,
+
+	//store and load
+	input wire[`AluOpBus] ex_aluop,
+	input wire[`InstAddrBus] ex_mem_addr,
+	input wire[`RegBus] ex_reg2,
+	output reg[`AluOpBus] mem_aluop,
+	output reg[`InstAddrBus] mem_mem_addr,
+	output reg[`RegBus] mem_reg2
     );
 	always@(posedge clk) begin
 		if(rst == `RstEnable) begin
@@ -59,6 +67,9 @@ module ex_mem(
 			mem_lo <= `ZeroWord;
 			hilo_o <= {`ZeroWord, `ZeroWord};
 			cnt_o <= 2'b00;
+			mem_aluop <= `EXE_NOP_OP;
+			mem_mem_addr <= `ZeroWord;
+			mem_reg <= `ZeroWord;
 		end // if(rst == `RstEnable)
 		//execute was stalled 
 		else if(stall[3] == `Stop && stall[4] == `NoStop) begin
@@ -70,6 +81,9 @@ module ex_mem(
 			mem_lo <= `ZeroWord;
 			hilo_o <= hilo_i;
 			cnt_o <= cnt_i;
+			mem_aluop <= `EXE_NOP_OP;
+			mem_mem_addr <= `ZeroWord;
+			mem_reg <= `ZeroWord;
 		end // else if(stall[3] == `Stop && stall[4] == `NoStop)
 		else if(stall[3] == `NoStop) begin
 			mem_wreg <= ex_wreg;
@@ -80,6 +94,9 @@ module ex_mem(
 			mem_lo <= ex_lo;
 			hilo_o <= {`ZeroWord, `ZeroWord};
 			cnt_o <= 2'b00;
+			mem_aluop <= ex_aluop;
+			mem_mem_addr <= ex_mem_addr;
+			mem_reg2 <= ex_reg2;
 		end // else
 		else begin
 			hilo_o <= hilo_i;

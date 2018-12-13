@@ -33,13 +33,26 @@ module id_ex(
 	input wire id_wreg,
 	//stall
 	input wire[5:0] stall,
+	//branch instructions
+	input wire id_is_in_delayslot,
+	input wire[`InstAddrBus] id_link_address,
+	input wire next_inst_in_delayslot_i,
+
+	input wire[`InstBus] id_inst,
+
 	//parts of instruction to ex
 	output reg[`AluOpBus] ex_aluop,
 	output reg[`AluSelBus] ex_alusel,
 	output reg[`RegBus] ex_reg1,
 	output reg[`RegBus] ex_reg2,
 	output reg[`RegAddrBus] ex_wd,
-	output reg ex_wreg
+	output reg ex_wreg,
+	//branch 
+	output reg ex_is_in_delayslot,
+	output reg[`InstAddrBus] ex_link_address,
+	output reg is_in_delayslot_o,
+
+	output reg[`InstBus] ex_inst
     );
 	always@(posedge clk) begin
 		if(rst == `RstEnable) begin
@@ -49,6 +62,10 @@ module id_ex(
 			ex_reg2 <= `ZeroWord;
 			ex_wd <= `NOPRegAddr;
 			ex_wreg <= `WriteDisable;
+			ex_is_in_delayslot <= `NotInDelaySlot;
+			ex_link_address <= `ZeroWord;
+			is_in_delayslot_o <= `NotInDelaySlot;
+			ex_inst <= `ZeroWord;
 		end
 		//decode was stalled
 		else if(stall[2] == `Stop && stall[3] == `NoStop) begin
@@ -58,6 +75,10 @@ module id_ex(
 			ex_reg2 <= `ZeroWord;
 			ex_wd <= `NOPRegAddr;
 			ex_wreg <= `WriteDisable;
+			ex_is_in_delayslot <= `NotInDelaySlot;
+			ex_link_address <= `ZeroWord;
+			is_in_delayslot_o <= `NotInDelaySlot;
+			ex_inst <= `ZeroWord;
 		end // else if(stall[2] == `Stop && stall[3] == `NoStop)
 		//decode was not stalled 
 		else if(stall[2] == `NoStop) begin
@@ -67,6 +88,10 @@ module id_ex(
 			ex_reg2 <= id_reg2;
 			ex_wd <= id_wd;
 			ex_wreg <= id_wreg;
+			ex_is_in_delayslot <= id_is_in_delayslot;
+			ex_link_address <= id_link_address;
+			is_in_delayslot_o <= next_inst_in_delayslot_i;
+			ex_inst <= id_inst;
 		end // else
 	end // always@(posedge clk)
 endmodule
