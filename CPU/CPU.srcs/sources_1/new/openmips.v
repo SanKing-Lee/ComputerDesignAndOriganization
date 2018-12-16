@@ -25,7 +25,14 @@ module openmips(
 	input wire rst, clk,
 	input wire[`InstBus] rom_data_i,
 	output wire[`InstAddrBus] rom_addr_o,
-	output wire rom_ce_o
+	output wire rom_ce_o,
+
+	input wire[`RegBus]            ram_data_i,
+	output wire[`RegBus]           ram_addr_o,
+	output wire[`RegBus]           ram_data_o,
+	output wire                    ram_we_o,
+	output wire[3:0]               ram_sel_o,
+	output wire[3:0]               ram_ce_o
     );
 	//id input
 	wire[`InstAddrBus] pc;
@@ -45,6 +52,7 @@ module openmips(
 	wire id_next_inst_in_delayslot_o;
 	wire[`InstAddrBus] id_branch_target_address_o;
 	wire id_branch_flag_o;
+	wire[`InstBus] id_inst_o;
 
 	//ex input
 	//from id_ex
@@ -63,6 +71,8 @@ module openmips(
 	//branch
 	wire ex_is_in_delayslot_i;
 	wire[`InstAddrBus] ex_link_address_i;
+	//load and store
+	wire[`InstBus] ex_inst_i;
 
 	//ex output
 	wire ex_wreg_o;
@@ -73,6 +83,9 @@ module openmips(
 	wire[`RegBus] ex_lo_o;
 	wire[`DoubleRegBus] ex_hilotemp_o;
 	wire[1:0] ex_cnt_o;
+	wire[`AluOpBus] ex_aluop_o;
+	wire[`InstAddrBus] ex_mem_addr_o;
+	wire[`RegBus] ex_reg2_o;
 
 	//mem input
 	wire mem_wreg_i;
@@ -81,6 +94,9 @@ module openmips(
 	wire mem_whilo_i;
 	wire[`RegBus] mem_hi_i;
 	wire[`RegBus] mem_lo_i;
+	wire[`InstAddrBus] mem_mem_addr_i;
+	wire[`AluOpBus] mem_aluop_i;
+	wire[`RegBus] mem_reg2_i;
 
 	//mem output
 	wire mem_wreg_o;
@@ -211,6 +227,8 @@ module openmips(
 		,.is_in_delayslot_o       	(id_is_in_delayslot_o)
 		,.link_addr_o             	(id_link_address_o)
 		,.next_inst_in_delayslot_o	(id_next_inst_in_delayslot_o)
+		//load and store
+		,.inst_o                  (id_inst_o)
 		);
 	//id_ex
 	id_ex id_ex0(
@@ -238,6 +256,9 @@ module openmips(
 		,.ex_is_in_delayslot      (ex_is_in_delayslot_i)
 		,.ex_link_address         (ex_link_address_i)
 		,.is_in_delayslot_o       (id_is_in_delayslot_i)
+		//load and store
+		,.id_inst                 (id_inst_o)
+		,.ex_inst                 (ex_inst_i)
 		);
 	//ex
 	ex ex0(
@@ -284,6 +305,11 @@ module openmips(
 		//branch
 		,.is_in_delayslot_i(ex_is_in_delayslot_i)
 		,.link_address_i   (ex_link_address_i)
+		//load and store
+		,.inst_i           (ex_inst_i)
+		,.aluop_o          (ex_aluop_o)
+		,.mem_addr_o       (ex_mem_addr_o)
+		,.reg2_o           (ex_reg2_o)
 		);
 	//ex_mem
 	ex_mem ex_mem0(
@@ -308,6 +334,13 @@ module openmips(
 		,.cnt_i     (ex_cnt_o)
 		,.hilo_o 	(ex_hilotemp_i)
 		,.cnt_o 	(ex_cnt_i)
+		//load and store
+		,.ex_aluop    (ex_aluop_i)
+		,.ex_mem_addr (ex_mem_addr_o)
+		,.ex_reg2     (ex_reg2_o)
+		,.mem_aluop   (mem_aluop_i)
+		,.mem_mem_addr(mem_mem_addr_i)
+		,.mem_reg2    (mem_reg2_i)
 		);
 	//mem
 	mem mem0(
@@ -326,6 +359,16 @@ module openmips(
 		,.whilo_o(mem_whilo_o)
 		,.hi_o   (mem_hi_o)
 		,.lo_o   (mem_lo_o)
+		//load and store
+		//from ex_mem
+		,.aluop_i   (mem_aluop_i)
+		,.mem_addr_i(mem_mem_addr_i)
+		,.reg2_i    (mem_reg2_i)
+		,.mem_data_i(ram_data_i)
+		,.mem_addr_o(ram_addr_o)
+		,.mem_we_o  (ram_we_o)
+		,.mem_sel_o (ram_sel_o)
+		,.mem_ce_o  (ram_Ce_o)
 		);
 	//mem_wb
 	mem_wb mem_wb0(

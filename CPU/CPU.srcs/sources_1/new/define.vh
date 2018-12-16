@@ -227,6 +227,12 @@
 `define InstMemNum 							131071
 `define InstMemNumLog2 						17
 
+//data bus
+`define DataAddrBus 31:0
+`define DataBus 31:0
+`define DataMemNum 131071
+`define DataMemNumLog2 17
+`define ByteWidth 7:0
 
 //register bus
 `define RegAddrBus 							4:0
@@ -247,10 +253,3 @@
 `define DivResultNotReady 					1'b0
 `define DivStart 							1'b1
 `define DivStop 							1'b0
-
-//branch macros
-`define Branch 								1'b1 
-`define NotBranch 							1'b0
-//delay slot
-`define InDelaySlot 						1'b1 
-`define NotInDelaySlot 						1'b0

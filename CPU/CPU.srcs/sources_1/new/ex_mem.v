@@ -69,7 +69,7 @@ module ex_mem(
 			cnt_o <= 2'b00;
 			mem_aluop <= `EXE_NOP_OP;
 			mem_mem_addr <= `ZeroWord;
-			mem_reg <= `ZeroWord;
+			mem_reg2 <= `ZeroWord;
 		end // if(rst == `RstEnable)
 		//execute was stalled 
 		else if(stall[3] == `Stop && stall[4] == `NoStop) begin
@@ -83,7 +83,7 @@ module ex_mem(
 			cnt_o <= cnt_i;
 			mem_aluop <= `EXE_NOP_OP;
 			mem_mem_addr <= `ZeroWord;
-			mem_reg <= `ZeroWord;
+			mem_reg2 <= `ZeroWord;
 		end // else if(stall[3] == `Stop && stall[4] == `NoStop)
 		else if(stall[3] == `NoStop) begin
 			mem_wreg <= ex_wreg;

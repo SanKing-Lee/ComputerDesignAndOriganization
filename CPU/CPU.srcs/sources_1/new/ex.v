@@ -73,9 +73,9 @@ module ex(
 	input wire[`InstAddrBus] link_address_i,
 
 	input wire[`InstBus] inst_i,
-	output reg[`AluOpBus] aluop_o,
-	output reg[`InstAddrBus] mem_addr_o,
-	output reg[`RegBus] reg2_o
+	output wire[`AluOpBus] aluop_o,
+	output wire[`InstAddrBus] mem_addr_o,
+	output wire[`RegBus] reg2_o
     );
 	//logical output
 	reg[`RegBus] logicout;
