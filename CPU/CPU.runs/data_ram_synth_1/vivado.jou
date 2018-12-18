@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+# Start of session at: Fri Dec 14 11:52:56 2018
+# Process ID: 6906
+# Current directory: /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.runs/data_ram_synth_1
+# Command line: vivado -log data_ram.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source data_ram.tcl
+# Log file: /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.runs/data_ram_synth_1/data_ram.vds
+# Journal file: /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.runs/data_ram_synth_1/vivado.jou
+#-----------------------------------------------------------
+source data_ram.tcl -notrace

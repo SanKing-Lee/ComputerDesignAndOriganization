@@ -1,3 +1,0 @@
-NumberHits:1
-Timestamp: Sun Nov 18 09:17:53 UTC 2018
-VLNV: xilinx.com:ip:blk_mem_gen:8.4

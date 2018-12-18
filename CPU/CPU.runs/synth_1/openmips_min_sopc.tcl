@@ -16,7 +16,7 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param synth.incrementalSynthesisCache ./.Xil/Vivado-2455-shawn-All-Series/incrSyn
+set_param synth.incrementalSynthesisCache ./.Xil/Vivado-2266-shawn-All-Series/incrSyn
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 create_project -in_memory -part xc7a100tcsg324-1
@@ -37,9 +37,17 @@ add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sour
 add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/test_nop_shift_inst.coe
 add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/test_move_inst.coe
 add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/test_arithmetic_inst.coe
+add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/test_maddandmsub_inst.coe
+add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/test_div_inst.coe
+add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/test_jump_inst.coe
+add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/test_branch_inst.coe
+add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/test_load_store_inst.coe
+add_files /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/test_cp0_inst.coe
 read_verilog /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/define.vh
 read_verilog -library xil_defaultlib {
+  /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/cp0_reg.v
   /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/ctrl.v
+  /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/div.v
   /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/ex.v
   /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/ex_mem.v
   /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/new/hilo_reg.v
@@ -56,6 +64,9 @@ read_verilog -library xil_defaultlib {
 read_ip -quiet /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/ip/inst_rom/inst_rom.xci
 set_property used_in_implementation false [get_files -all /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/ip/inst_rom/inst_rom_ooc.xdc]
 
+read_ip -quiet /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/ip/data_ram/data_ram.xci
+set_property used_in_implementation false [get_files -all /home/shawn/workspace/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/ip/data_ram/data_ram_ooc.xdc]
+
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
 # design are intentionally left as such for best results. Dcp files will be
@@ -64,6 +75,8 @@ set_property used_in_implementation false [get_files -all /home/shawn/workspace/
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]
 

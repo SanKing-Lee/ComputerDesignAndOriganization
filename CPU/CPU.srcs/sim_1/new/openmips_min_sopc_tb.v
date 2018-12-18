@@ -32,5 +32,5 @@ module openmips_min_sopc_tb(
 		#25 rst = `RstDisable;
 	end // initial
 
-	openmips_min_sopc openmps_min_sopc0(.clk(CLOCK_50),.rst(rst));
+    openmips_min_sopc openmips_min_sopc0(.clk(CLOCK_50),.rst(rst));
 endmodule

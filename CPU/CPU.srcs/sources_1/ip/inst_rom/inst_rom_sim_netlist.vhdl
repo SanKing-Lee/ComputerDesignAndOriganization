@@ -1,7 +1,7 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
--- Date        : Sun Dec  9 15:12:04 2018
+-- Date        : Tue Dec 18 13:27:56 2018
 -- Host        : DESKTOP-FAD05NK running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
 --               D:/Repositories/ComputerDesignAndOriganization/CPU/CPU.srcs/sources_1/ip/inst_rom/inst_rom_sim_netlist.vhdl
@@ -19,7 +19,9 @@ entity inst_rom_blk_mem_gen_prim_wrapper_init is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    dina : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    wea : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_prim_wrapper_init : entity is "blk_mem_gen_prim_wrapper_init";
@@ -47,18 +49,18 @@ begin
       INITP_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_00 => X"00000000340111003401111134010002100000043401000100031C0034038000",
-      INIT_01 => X"340111000000000014200012340111113401110003E1001A0411000A34010003",
-      INIT_02 => X"3401111103E008251063000A3401000400000000000000000000000034011111",
-      INIT_03 => X"000000003401110034011111340100091C200024340100083401000734011100",
-      INIT_04 => X"0000000000000000000000003401110034011111340100060421FFF734010005",
+      INIT_00 => X"0000000000000000000000000000000000000000000000000020000834010100",
+      INIT_01 => X"0000000000000000000000004200001840815800202100644001580020420001",
+      INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_08 => X"046000043401000E3401000D3401000C3401000B001F08250471FFDE3401000A",
-      INIT_09 => X"34010012340100111820FFCB340100100000000000000000340111003401000F",
-      INIT_0A => X"0000000000000000000000000000000034011100001F08250470000634010013",
-      INIT_0B => X"00000000000000000000000000000000000000000800005A0000000034010014",
+      INIT_08 => X"000000000800004640816000342104013C011000408158003401006434020000",
+      INIT_09 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0B => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_0C => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -132,8 +134,8 @@ begin
       SIM_DEVICE => "7SERIES",
       SRVAL_A => X"00000",
       SRVAL_B => X"00000",
-      WRITE_MODE_A => "WRITE_FIRST",
-      WRITE_MODE_B => "WRITE_FIRST",
+      WRITE_MODE_A => "READ_FIRST",
+      WRITE_MODE_B => "READ_FIRST",
       WRITE_WIDTH_A => 18,
       WRITE_WIDTH_B => 18
     )
@@ -146,8 +148,8 @@ begin
       ADDRBWRADDR(4 downto 0) => B"10000",
       CLKARDCLK => clka,
       CLKBWRCLK => clka,
-      DIADI(15 downto 0) => B"0000000000000000",
-      DIBDI(15 downto 0) => B"0000000000000000",
+      DIADI(15 downto 0) => dina(15 downto 0),
+      DIBDI(15 downto 0) => dina(31 downto 16),
       DIPADIP(1 downto 0) => B"00",
       DIPBDIP(1 downto 0) => B"00",
       DOADO(15 downto 0) => douta(15 downto 0),
@@ -164,8 +166,9 @@ begin
       RSTRAMB => '0',
       RSTREGARSTREG => '0',
       RSTREGB => '0',
-      WEA(1 downto 0) => B"00",
-      WEBWE(3 downto 0) => B"0000"
+      WEA(1 downto 0) => wea(1 downto 0),
+      WEBWE(3 downto 2) => B"00",
+      WEBWE(1 downto 0) => wea(3 downto 2)
     );
 end STRUCTURE;
 library IEEE;
@@ -177,7 +180,9 @@ entity inst_rom_blk_mem_gen_prim_width is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    dina : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    wea : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
@@ -189,8 +194,10 @@ begin
      port map (
       addra(7 downto 0) => addra(7 downto 0),
       clka => clka,
+      dina(31 downto 0) => dina(31 downto 0),
       douta(31 downto 0) => douta(31 downto 0),
-      ena => ena
+      ena => ena,
+      wea(3 downto 0) => wea(3 downto 0)
     );
 end STRUCTURE;
 library IEEE;
@@ -202,7 +209,9 @@ entity inst_rom_blk_mem_gen_generic_cstr is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    dina : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    wea : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
@@ -214,8 +223,10 @@ begin
      port map (
       addra(7 downto 0) => addra(7 downto 0),
       clka => clka,
+      dina(31 downto 0) => dina(31 downto 0),
       douta(31 downto 0) => douta(31 downto 0),
-      ena => ena
+      ena => ena,
+      wea(3 downto 0) => wea(3 downto 0)
     );
 end STRUCTURE;
 library IEEE;
@@ -227,7 +238,9 @@ entity inst_rom_blk_mem_gen_top is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    dina : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    wea : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_top : entity is "blk_mem_gen_top";
@@ -239,8 +252,10 @@ begin
      port map (
       addra(7 downto 0) => addra(7 downto 0),
       clka => clka,
+      dina(31 downto 0) => dina(31 downto 0),
       douta(31 downto 0) => douta(31 downto 0),
-      ena => ena
+      ena => ena,
+      wea(3 downto 0) => wea(3 downto 0)
     );
 end STRUCTURE;
 library IEEE;
@@ -252,7 +267,9 @@ entity inst_rom_blk_mem_gen_v8_4_1_synth is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
-    addra : in STD_LOGIC_VECTOR ( 7 downto 0 )
+    addra : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    dina : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    wea : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of inst_rom_blk_mem_gen_v8_4_1_synth : entity is "blk_mem_gen_v8_4_1_synth";
@@ -264,8 +281,10 @@ begin
      port map (
       addra(7 downto 0) => addra(7 downto 0),
       clka => clka,
+      dina(31 downto 0) => dina(31 downto 0),
       douta(31 downto 0) => douta(31 downto 0),
-      ena => ena
+      ena => ena,
+      wea(3 downto 0) => wea(3 downto 0)
     );
 end STRUCTURE;
 library IEEE;
@@ -278,7 +297,7 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
     rsta : in STD_LOGIC;
     ena : in STD_LOGIC;
     regcea : in STD_LOGIC;
-    wea : in STD_LOGIC_VECTOR ( 0 to 0 );
+    wea : in STD_LOGIC_VECTOR ( 3 downto 0 );
     addra : in STD_LOGIC_VECTOR ( 31 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 31 downto 0 );
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -286,7 +305,7 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
     rstb : in STD_LOGIC;
     enb : in STD_LOGIC;
     regceb : in STD_LOGIC;
-    web : in STD_LOGIC_VECTOR ( 0 to 0 );
+    web : in STD_LOGIC_VECTOR ( 3 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 31 downto 0 );
     dinb : in STD_LOGIC_VECTOR ( 31 downto 0 );
     doutb : out STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -311,7 +330,7 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
     s_axi_awvalid : in STD_LOGIC;
     s_axi_awready : out STD_LOGIC;
     s_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s_axi_wstrb : in STD_LOGIC_VECTOR ( 0 to 0 );
+    s_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
     s_axi_wlast : in STD_LOGIC;
     s_axi_wvalid : in STD_LOGIC;
     s_axi_wready : out STD_LOGIC;
@@ -385,7 +404,7 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
   attribute C_EN_SLEEP_PIN : integer;
   attribute C_EN_SLEEP_PIN of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_EST_POWER_SUMMARY : string;
-  attribute C_EST_POWER_SUMMARY of inst_rom_blk_mem_gen_v8_4_1 : entity is "Estimated Power for IP     :     3.375199 mW";
+  attribute C_EST_POWER_SUMMARY of inst_rom_blk_mem_gen_v8_4_1 : entity is "Estimated Power for IP     :     3.64395 mW";
   attribute C_FAMILY : string;
   attribute C_FAMILY of inst_rom_blk_mem_gen_v8_4_1 : entity is "artix7";
   attribute C_HAS_AXI_ID : integer;
@@ -429,7 +448,7 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
   attribute C_LOAD_INIT_FILE : integer;
   attribute C_LOAD_INIT_FILE of inst_rom_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_MEM_TYPE : integer;
-  attribute C_MEM_TYPE of inst_rom_blk_mem_gen_v8_4_1 : entity is 3;
+  attribute C_MEM_TYPE of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_MUX_PIPELINE_STAGES : integer;
   attribute C_MUX_PIPELINE_STAGES of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_PRIM_TYPE : integer;
@@ -455,9 +474,9 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
   attribute C_USE_BRAM_BLOCK : integer;
   attribute C_USE_BRAM_BLOCK of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_USE_BYTE_WEA : integer;
-  attribute C_USE_BYTE_WEA of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
+  attribute C_USE_BYTE_WEA of inst_rom_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_USE_BYTE_WEB : integer;
-  attribute C_USE_BYTE_WEB of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
+  attribute C_USE_BYTE_WEB of inst_rom_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_USE_DEFAULT_DATA : integer;
   attribute C_USE_DEFAULT_DATA of inst_rom_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_USE_ECC : integer;
@@ -467,15 +486,15 @@ entity inst_rom_blk_mem_gen_v8_4_1 is
   attribute C_USE_URAM : integer;
   attribute C_USE_URAM of inst_rom_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_WEA_WIDTH : integer;
-  attribute C_WEA_WIDTH of inst_rom_blk_mem_gen_v8_4_1 : entity is 1;
+  attribute C_WEA_WIDTH of inst_rom_blk_mem_gen_v8_4_1 : entity is 4;
   attribute C_WEB_WIDTH : integer;
-  attribute C_WEB_WIDTH of inst_rom_blk_mem_gen_v8_4_1 : entity is 1;
+  attribute C_WEB_WIDTH of inst_rom_blk_mem_gen_v8_4_1 : entity is 4;
   attribute C_WRITE_DEPTH_A : integer;
   attribute C_WRITE_DEPTH_A of inst_rom_blk_mem_gen_v8_4_1 : entity is 256;
   attribute C_WRITE_DEPTH_B : integer;
   attribute C_WRITE_DEPTH_B of inst_rom_blk_mem_gen_v8_4_1 : entity is 256;
   attribute C_WRITE_MODE_A : string;
-  attribute C_WRITE_MODE_A of inst_rom_blk_mem_gen_v8_4_1 : entity is "WRITE_FIRST";
+  attribute C_WRITE_MODE_A of inst_rom_blk_mem_gen_v8_4_1 : entity is "READ_FIRST";
   attribute C_WRITE_MODE_B : string;
   attribute C_WRITE_MODE_B of inst_rom_blk_mem_gen_v8_4_1 : entity is "WRITE_FIRST";
   attribute C_WRITE_WIDTH_A : integer;
@@ -653,8 +672,10 @@ inst_blk_mem_gen: entity work.inst_rom_blk_mem_gen_v8_4_1_synth
      port map (
       addra(7 downto 0) => addra(9 downto 2),
       clka => clka,
+      dina(31 downto 0) => dina(31 downto 0),
       douta(31 downto 0) => douta(31 downto 0),
-      ena => ena
+      ena => ena,
+      wea(3 downto 0) => wea(3 downto 0)
     );
 end STRUCTURE;
 library IEEE;
@@ -665,7 +686,9 @@ entity inst_rom is
   port (
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
+    wea : in STD_LOGIC_VECTOR ( 3 downto 0 );
     addra : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    dina : in STD_LOGIC_VECTOR ( 31 downto 0 );
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   attribute NotValidForBitStream : boolean;
@@ -746,7 +769,7 @@ architecture STRUCTURE of inst_rom is
   attribute C_EN_SLEEP_PIN : integer;
   attribute C_EN_SLEEP_PIN of U0 : label is 0;
   attribute C_EST_POWER_SUMMARY : string;
-  attribute C_EST_POWER_SUMMARY of U0 : label is "Estimated Power for IP     :     3.375199 mW";
+  attribute C_EST_POWER_SUMMARY of U0 : label is "Estimated Power for IP     :     3.64395 mW";
   attribute C_FAMILY : string;
   attribute C_FAMILY of U0 : label is "artix7";
   attribute C_HAS_AXI_ID : integer;
@@ -790,7 +813,7 @@ architecture STRUCTURE of inst_rom is
   attribute C_LOAD_INIT_FILE : integer;
   attribute C_LOAD_INIT_FILE of U0 : label is 1;
   attribute C_MEM_TYPE : integer;
-  attribute C_MEM_TYPE of U0 : label is 3;
+  attribute C_MEM_TYPE of U0 : label is 0;
   attribute C_MUX_PIPELINE_STAGES : integer;
   attribute C_MUX_PIPELINE_STAGES of U0 : label is 0;
   attribute C_PRIM_TYPE : integer;
@@ -816,9 +839,9 @@ architecture STRUCTURE of inst_rom is
   attribute C_USE_BRAM_BLOCK : integer;
   attribute C_USE_BRAM_BLOCK of U0 : label is 0;
   attribute C_USE_BYTE_WEA : integer;
-  attribute C_USE_BYTE_WEA of U0 : label is 0;
+  attribute C_USE_BYTE_WEA of U0 : label is 1;
   attribute C_USE_BYTE_WEB : integer;
-  attribute C_USE_BYTE_WEB of U0 : label is 0;
+  attribute C_USE_BYTE_WEB of U0 : label is 1;
   attribute C_USE_DEFAULT_DATA : integer;
   attribute C_USE_DEFAULT_DATA of U0 : label is 1;
   attribute C_USE_ECC : integer;
@@ -828,15 +851,15 @@ architecture STRUCTURE of inst_rom is
   attribute C_USE_URAM : integer;
   attribute C_USE_URAM of U0 : label is 0;
   attribute C_WEA_WIDTH : integer;
-  attribute C_WEA_WIDTH of U0 : label is 1;
+  attribute C_WEA_WIDTH of U0 : label is 4;
   attribute C_WEB_WIDTH : integer;
-  attribute C_WEB_WIDTH of U0 : label is 1;
+  attribute C_WEB_WIDTH of U0 : label is 4;
   attribute C_WRITE_DEPTH_A : integer;
   attribute C_WRITE_DEPTH_A of U0 : label is 256;
   attribute C_WRITE_DEPTH_B : integer;
   attribute C_WRITE_DEPTH_B of U0 : label is 256;
   attribute C_WRITE_MODE_A : string;
-  attribute C_WRITE_MODE_A of U0 : label is "WRITE_FIRST";
+  attribute C_WRITE_MODE_A of U0 : label is "READ_FIRST";
   attribute C_WRITE_MODE_B : string;
   attribute C_WRITE_MODE_B of U0 : label is "WRITE_FIRST";
   attribute C_WRITE_WIDTH_A : integer;
@@ -852,7 +875,9 @@ architecture STRUCTURE of inst_rom is
   attribute x_interface_parameter of clka : signal is "XIL_INTERFACENAME BRAM_PORTA, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER";
   attribute x_interface_info of ena : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTA EN";
   attribute x_interface_info of addra : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTA ADDR";
+  attribute x_interface_info of dina : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTA DIN";
   attribute x_interface_info of douta : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTA DOUT";
+  attribute x_interface_info of wea : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTA WE";
 begin
 U0: entity work.inst_rom_blk_mem_gen_v8_4_1
      port map (
@@ -862,7 +887,7 @@ U0: entity work.inst_rom_blk_mem_gen_v8_4_1
       clkb => '0',
       dbiterr => NLW_U0_dbiterr_UNCONNECTED,
       deepsleep => '0',
-      dina(31 downto 0) => B"00000000000000000000000000000000",
+      dina(31 downto 0) => dina(31 downto 0),
       dinb(31 downto 0) => B"00000000000000000000000000000000",
       douta(31 downto 0) => douta(31 downto 0),
       doutb(31 downto 0) => NLW_U0_doutb_UNCONNECTED(31 downto 0),
@@ -912,12 +937,12 @@ U0: entity work.inst_rom_blk_mem_gen_v8_4_1
       s_axi_wdata(31 downto 0) => B"00000000000000000000000000000000",
       s_axi_wlast => '0',
       s_axi_wready => NLW_U0_s_axi_wready_UNCONNECTED,
-      s_axi_wstrb(0) => '0',
+      s_axi_wstrb(3 downto 0) => B"0000",
       s_axi_wvalid => '0',
       sbiterr => NLW_U0_sbiterr_UNCONNECTED,
       shutdown => '0',
       sleep => '0',
-      wea(0) => '0',
-      web(0) => '0'
+      wea(3 downto 0) => wea(3 downto 0),
+      web(3 downto 0) => B"0000"
     );
 end STRUCTURE;

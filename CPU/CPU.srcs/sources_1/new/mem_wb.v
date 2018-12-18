@@ -40,7 +40,19 @@ module mem_wb(
 	output reg[`RegBus] wb_lo,
 
 	//stall
-	input wire[5:0] stall
+	input wire[5:0] stall,
+
+	//cp0 reg
+	input wire                   mem_cp0_reg_we,
+	input wire[4:0]              mem_cp0_reg_waddr,
+	input wire[`RegBus]          mem_cp0_reg_data,	
+
+	output reg                   wb_cp0_reg_we,
+	output reg[4:0]              wb_cp0_reg_waddr,
+	output reg[`RegBus]          wb_cp0_reg_data,
+
+	//flush
+	input wire flush	
     );	
 	always@(posedge clk) begin
 		if(rst == `RstEnable) begin
@@ -50,14 +62,32 @@ module mem_wb(
 			wb_whilo <= `WriteDisable;
 			wb_hi <= `ZeroWord;
 			wb_lo <= `ZeroWord;
+			wb_cp0_reg_we <= `WriteDisable;
+			wb_cp0_reg_waddr <= 5'b00000;
+			wb_cp0_reg_data <= `ZeroWord;
 		end // if(rst == `RstEnable)
-		else if(stall[4] == `Stop && stall[5] == `NoStop) begin
+		else if(flush == 1'b1) begin
+			/* code */
 			wb_wreg <= `WriteDisable;
 			wb_wd <= `NOPRegAddr;
 			wb_wdata <= `ZeroWord;
 			wb_whilo <= `WriteDisable;
 			wb_hi <= `ZeroWord;
 			wb_lo <= `ZeroWord;
+			wb_cp0_reg_we <= `WriteDisable;
+			wb_cp0_reg_waddr <= 5'b00000;
+			wb_cp0_reg_data <= `ZeroWord;
+		end
+		else if(stall[4] == `Stop && stall[5] == `NoStop) begin
+			wb_wreg <= `WriteDisable;
+			wb_wd <= `NOPRegAddr;
+			wb_wdata <= `ZeroWord;
+			wb_whilo <= `WriteDisable;
+			wb_hi <= `ZeroWord;
+			wb_lo <= `ZeroWord;	
+			wb_cp0_reg_we <= `WriteDisable;
+			wb_cp0_reg_waddr <= 5'b00000;
+			wb_cp0_reg_data <= `ZeroWord;	
 		end // else if(stall[4] == `Stop && stall[5] == `NoStop)
 		else if(stall[4] == `NoStop) begin
 			wb_wreg <= mem_wreg;
@@ -66,6 +96,9 @@ module mem_wb(
 			wb_whilo <= mem_whilo;
 			wb_hi <= mem_hi;
 			wb_lo <= mem_lo;
+			wb_cp0_reg_we <= mem_cp0_reg_we;
+			wb_cp0_reg_waddr <= mem_cp0_reg_waddr;
+			wb_cp0_reg_data <= mem_cp0_reg_data;		
 		end // else
 	end
 endmodule

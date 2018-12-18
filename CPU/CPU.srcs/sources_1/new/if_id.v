@@ -29,11 +29,17 @@ module if_id(
 	input wire[`InstBus] if_inst,
 	input wire[5:0] stall,
 	output reg[`InstAddrBus] id_pc,
-	output reg[`InstBus] id_inst
+	output reg[`InstBus] id_inst,
+	//exception
+	input wire flush
     );
 	//set output according to rst
 	always@(posedge clk) begin
 		if(rst == `RstEnable) begin
+			id_pc <= `ZeroWord;
+			id_inst <= `ZeroWord;
+		end
+		else if(flush == 1'b1) begin
 			id_pc <= `ZeroWord;
 			id_inst <= `ZeroWord;
 		end
